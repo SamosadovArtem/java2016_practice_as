@@ -14,22 +14,29 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-public class QuestionDaoSQL implements QuestionDao {
+public class QuestionDaoImpl implements QuestionDao {
 
     private static final String SELECT_ALL_USER_QUERY = "SELECT * FROM user";
-    public static final String SELECT_ALL_QUESTION_QUERY = "SELECT * FROM question";
-    public static final String SELECT_ANSWER_FOR_QUESTION_QUERY = "SELECT * FROM answer WHERE question = ?";
-    public static final String ADD_USER_QUERY = "INSERT INTO user(name,age) VALUES (?,?)";
+    private static final String SELECT_ALL_QUESTION_QUERY = "SELECT * FROM question";
+    private static final String SELECT_ANSWER_FOR_QUESTION_QUERY = "SELECT * FROM answer WHERE question = ?";
+    private static final String ADD_USER_QUERY = "INSERT INTO user(name,age) VALUES (?,?)";
 
     private String username;
     private String password;
     private String url;
     private Properties property;
 
-    public QuestionDaoSQL(){
+    public QuestionDaoImpl(){
         loadProperties();
         loadDriver();
     }
+
+    private PreparedStatement getStatement(String query) throws SQLException {
+        Connection con = DriverManager.getConnection(url,username,password);
+        PreparedStatement statement = con.prepareStatement(query);
+        return statement;
+    }
+
     private void loadProperties(){
         property = new Properties();
         try(InputStream propertiesFile = getClass().getClassLoader().getResourceAsStream("config.properties")) {
@@ -44,6 +51,7 @@ public class QuestionDaoSQL implements QuestionDao {
             e.printStackTrace();
         }
     }
+
     private void loadDriver(){
         try {
             Driver driver = new FabricMySQLDriver();
@@ -54,9 +62,7 @@ public class QuestionDaoSQL implements QuestionDao {
     }
 
     public void addUser(User user) throws SQLException {
-
-        try (Connection con = DriverManager.getConnection(url,username,password);
-            PreparedStatement statement = con.prepareStatement(ADD_USER_QUERY)) {
+        try (PreparedStatement statement = getStatement(ADD_USER_QUERY)) {
             statement.setString(1,user.getName());
             statement.setInt(2,user.getAge());
             statement.execute();
@@ -69,10 +75,7 @@ public class QuestionDaoSQL implements QuestionDao {
     public List<Answer> getAnswersForQuestion(Question question) throws SQLException {
         List<Answer> answers =  new ArrayList();
 
-        try (Connection con = DriverManager.getConnection(url,username,password);
-             PreparedStatement statement = con.prepareStatement(SELECT_ANSWER_FOR_QUESTION_QUERY);
-             ) {
-            try {
+        try (PreparedStatement statement = getStatement(SELECT_ANSWER_FOR_QUESTION_QUERY)) {
                 statement.setInt(1,question.getId());
                 ResultSet resultSet = statement.executeQuery();
                 while (resultSet.next()) {
@@ -83,11 +86,6 @@ public class QuestionDaoSQL implements QuestionDao {
                     tempAnswer.setRight(resultSet.getBoolean("isRight"));
                     answers.add(tempAnswer);
                 }
-            }
-            catch (SQLException e){
-                e.printStackTrace();
-            }
-
         } catch (SQLException e){
             e.printStackTrace();
         }
@@ -98,8 +96,7 @@ public class QuestionDaoSQL implements QuestionDao {
     public List<Question> getQuestions() throws SQLException {
         List<Question> questions = new ArrayList();
 
-        try (Connection con = DriverManager.getConnection(url,username,password);
-             PreparedStatement statement = con.prepareStatement(SELECT_ALL_QUESTION_QUERY);
+        try (PreparedStatement statement = getStatement(SELECT_ALL_QUESTION_QUERY);
              ResultSet resultSet = statement.executeQuery()) {
 
             while (resultSet.next()) {
@@ -118,8 +115,7 @@ public class QuestionDaoSQL implements QuestionDao {
     public List<User> getUsers() throws SQLException {
         List<User> users = new ArrayList();
 
-        try (Connection con = DriverManager.getConnection(url,username,password);
-             PreparedStatement statement = con.prepareStatement(SELECT_ALL_USER_QUERY);
+        try (PreparedStatement statement = getStatement(SELECT_ALL_USER_QUERY);
              ResultSet resultSet = statement.executeQuery()) {
 
             while (resultSet.next()) {
