@@ -4,8 +4,7 @@ import com.inquirer.models.Answer;
 import com.inquirer.models.Question;
 import com.inquirer.models.User;
 import com.mysql.fabric.jdbc.FabricMySQLDriver;
-
-import java.io.FileInputStream;
+import org.apache.log4j.Logger;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
@@ -20,6 +19,8 @@ public class QuestionDaoImpl implements QuestionDao {
     private static final String SELECT_ALL_QUESTION_QUERY = "SELECT * FROM question";
     private static final String SELECT_ANSWER_FOR_QUESTION_QUERY = "SELECT * FROM answer WHERE question = ?";
     private static final String ADD_USER_QUERY = "INSERT INTO user(name,age) VALUES (?,?)";
+
+    private static final Logger loger = Logger.getLogger(QuestionDaoImpl.class);
 
     private String username;
     private String password;
@@ -46,9 +47,9 @@ public class QuestionDaoImpl implements QuestionDao {
             password = property.getProperty("db.password");
             url = property.getProperty("db.url");
         } catch (FileNotFoundException e) {
-            e.printStackTrace();
+            loger.error(e);
         } catch (IOException e) {
-            e.printStackTrace();
+            loger.error(e);
         }
     }
 
@@ -57,7 +58,7 @@ public class QuestionDaoImpl implements QuestionDao {
             Driver driver = new FabricMySQLDriver();
             DriverManager.registerDriver(driver);
         } catch (SQLException e){
-            e.printStackTrace();
+            loger.error(e);
         }
     }
 
@@ -67,7 +68,7 @@ public class QuestionDaoImpl implements QuestionDao {
             statement.setInt(2,user.getAge());
             statement.execute();
         } catch (SQLException e){
-            e.printStackTrace();
+            loger.error(e);
         }
 
     }
@@ -87,7 +88,7 @@ public class QuestionDaoImpl implements QuestionDao {
                     answers.add(tempAnswer);
                 }
         } catch (SQLException e){
-            e.printStackTrace();
+            loger.error(e);
         }
 
         return answers;
@@ -106,7 +107,7 @@ public class QuestionDaoImpl implements QuestionDao {
                 questions.add(tempQuestion);
             }
         } catch (SQLException e){
-            e.printStackTrace();
+            loger.error(e);
         }
 
         return questions;
@@ -126,7 +127,7 @@ public class QuestionDaoImpl implements QuestionDao {
                 users.add(tempUser);
             }
         } catch (SQLException e){
-            e.printStackTrace();
+            loger.error(e);
         }
 
         return users;
