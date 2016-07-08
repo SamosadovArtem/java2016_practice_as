@@ -5,9 +5,9 @@
          version="3.1">
 
     <display-name>inquirer</display-name>
-
-
-
+    <listener>
+        <listener-class>org.apache.tiles.web.startup.simple.SimpleTilesListener</listener-class>
+    </listener>
     <servlet>
         <servlet-name>HelloServlet</servlet-name>
         <servlet-class>com.inquirer.servlets.HelloServlet</servlet-class>

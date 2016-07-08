@@ -1,0 +1,6 @@
+com\inquirer\dao\QuestionDao.class
+com\inquirer\models\Question.class
+com\inquirer\servlets\HelloServlet.class
+com\inquirer\models\Answer.class
+com\inquirer\dao\QuestionDaoImpl.class
+com\inquirer\models\User.class

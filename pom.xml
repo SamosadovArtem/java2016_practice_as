@@ -28,7 +28,11 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>5.1.38</version>
         </dependency>
-
+        <dependency>
+            <groupId>org.apache.tiles</groupId>
+            <artifactId>tiles-servlet</artifactId>
+            <version>3.0.5</version>
+        </dependency>
     </dependencies>
     <build>
         <finalName>inquirer</finalName>
@@ -38,7 +42,7 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <configuration>
-                    <webXml>web\WEB-INF\web.xml</webXml>
+                    <!--<webXml>web\WEB-INF\web.xml</webXml>-->
                 </configuration>
             </plugin>
             <plugin>
