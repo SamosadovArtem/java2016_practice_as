@@ -3,3 +3,6 @@ inquirer.iml
 out/
 target/
 META-INF/application.xml
+.settings/
+.project
+.classpath
