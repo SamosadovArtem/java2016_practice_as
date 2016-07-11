@@ -11,7 +11,7 @@ mvn package
 
 ## Tasks list
 
-- [ ] .gitignore
-- [ ] jetty deploy plugin
++ .gitignore
++ jetty deploy plugin
 - [ ] header + footer at tiles
 - [ ] index.html redirect to first page
