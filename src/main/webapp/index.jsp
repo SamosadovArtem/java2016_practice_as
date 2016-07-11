@@ -11,6 +11,6 @@
     <title>$Title$</title>
   </head>
   <body>
-  index page
+  index page my tetetetetst
   </body>
 </html>
