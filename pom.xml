@@ -38,6 +38,11 @@
             <artifactId>tiles-servlet</artifactId>
             <version>3.0.5</version>
         </dependency>
+        <dependency>
+            <groupId>org.mortbay.jetty</groupId>
+            <artifactId>jetty-maven-plugin</artifactId>
+            <version>8.1.16.v20140903</version>
+        </dependency>
     </dependencies>
     <build>
         <finalName>inquirer</finalName>
