@@ -3,6 +3,10 @@
         "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
         "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
-    <definition name="inquirer.homepage" template="/WEB-INF/jsp/inquirer.jsp">
+    <definition name="inquirer.testPage" template="/WEB-INF/jsp/inquirer.jsp">
+    </definition>
+    <definition name="inquirer.loginPage" template="/WEB-INF/jsp/login_page.jsp">
+    </definition>
+    <definition name="inquirer.resultsPage" template="/WEB-INF/jsp/results_page.jsp">
     </definition>
 </tiles-definitions>

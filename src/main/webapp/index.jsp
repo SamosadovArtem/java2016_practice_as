@@ -11,6 +11,10 @@
     <title>$Title$</title>
   </head>
   <body>
-  index page my tetetetetst
+  <%
+      String site = "../inquirer/login" ;
+      response.setStatus(response.SC_MOVED_TEMPORARILY);
+      response.setHeader("Location", site);
+  %>
   </body>
 </html>

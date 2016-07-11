@@ -12,15 +12,14 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Created by Admin on 06.07.2016.
+ * Created by Егор on 11.07.2016.
  */
-public class HelloServlet  extends HttpServlet {
+public class LoginPageServlet extends HttpServlet{
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         TilesContainer container = TilesAccess.getContainer(new ServletApplicationContext(request.getSession().getServletContext()));
         Request req = new ServletRequest(container.getApplicationContext(), request, response);
-        container.render("inquirer.testPage", req);
+        container.render("inquirer.loginPage", req);
     }
 }
-
