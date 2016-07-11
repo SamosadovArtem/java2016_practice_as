@@ -12,7 +12,7 @@
   </head>
   <body>
   <%
-      String site = "http://localhost:8080/inquirer/login" ;
+      String site = "../inquirer/login" ;
       response.setStatus(response.SC_MOVED_TEMPORARILY);
       response.setHeader("Location", site);
   %>
