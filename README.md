@@ -8,3 +8,10 @@ Inquirer is a web application used for test knowledge
 ```
 mvn package
 ```
+
+## Tasks list
+
+- [ ] .gitignore
+- [ ] jetty deploy plugin
+- [ ] header + footer at tiles
+- [ ] index.html redirect to first page
