@@ -20,7 +20,7 @@ public class HelloServlet  extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         TilesContainer container = TilesAccess.getContainer(new ServletApplicationContext(request.getSession().getServletContext()));
         Request req = new ServletRequest(container.getApplicationContext(), request, response);
-        container.render("inquirer.homepage", req);
+        container.render("inquirer.testPage", req);
     }
 }
 
