@@ -3,9 +3,7 @@ package com.inquirer.dao;
 import com.inquirer.models.User;
 import org.apache.log4j.Logger;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,6 +11,7 @@ public class UserDaoImpl implements UserDao {
 
     private static final String SELECT_ALL_USER_QUERY = "SELECT * FROM user";
     private static final String ADD_USER_QUERY = "INSERT INTO user(name,age) VALUES (?,?)";
+    private static final String GET_USER_BY_NAME_QUERY = "SELECT * FROM user WHERE name = ?";
 
     private static final Logger LOGER = Logger.getLogger(QuestionDaoImpl.class);
 
@@ -48,5 +47,23 @@ public class UserDaoImpl implements UserDao {
         }
 
         return users;
+    }
+
+    @Override
+    public User getUserByName(String name) throws SQLException {
+        User user = null;
+        try (PreparedStatement statement = propertiesLoader.getStatement(GET_USER_BY_NAME_QUERY)) {
+            statement.setString(1,name);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                user = new User();
+                user.setId(resultSet.getInt("id"));
+                user.setName(resultSet.getString("name"));
+                user.setAge(resultSet.getInt("age"));
+            }
+        } catch (SQLException e) {
+            LOGER.error(e);
+        }
+        return user;
     }
 }

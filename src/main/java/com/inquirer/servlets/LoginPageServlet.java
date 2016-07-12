@@ -1,11 +1,15 @@
 package com.inquirer.servlets;
 
+
+import com.inquirer.models.User;
+import com.inquirer.services.UserLoginService;
 import org.apache.tiles.TilesContainer;
 import org.apache.tiles.access.TilesAccess;
 import org.apache.tiles.request.Request;
 import org.apache.tiles.request.servlet.ServletApplicationContext;
 import org.apache.tiles.request.servlet.ServletRequest;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,8 +22,24 @@ public class LoginPageServlet extends HttpServlet{
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        request.setAttribute("status","User name");
         TilesContainer container = TilesAccess.getContainer(new ServletApplicationContext(request.getSession().getServletContext()));
         Request req = new ServletRequest(container.getApplicationContext(), request, response);
         container.render("inquirer.loginPage", req);
+    }
+    public void doPost(HttpServletRequest request,HttpServletResponse response) throws IOException, ServletException {
+        User user = new User();
+        user.setName(request.getParameter("login"));
+
+        UserLoginService userLoginService = new UserLoginService();
+
+        if(userLoginService.CheckUser(user)) {
+            response.sendRedirect("test");
+        } else{
+            request.setAttribute("status","User not found");
+            TilesContainer container = TilesAccess.getContainer(new ServletApplicationContext(request.getSession().getServletContext()));
+            Request req = new ServletRequest(container.getApplicationContext(), request, response);
+            container.render("inquirer.loginPage", req);
+        }
     }
 }

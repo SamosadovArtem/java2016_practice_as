@@ -20,6 +20,11 @@ public class UserServiceImpl implements UserService {
         userDao.addUser(user);
     }
 
+    @Override
+    public User getUserByName(String name) throws SQLException {
+        return userDao.getUserByName(name);
+    }
+
     public void setUserDao(UserDao userDao) {
         this.userDao = userDao;
     }

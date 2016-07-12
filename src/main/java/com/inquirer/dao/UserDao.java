@@ -10,4 +10,6 @@ public interface UserDao {
     public void addUser(User user) throws SQLException;
 
     public List<User> getUsers() throws SQLException;
+
+    public User getUserByName(String name) throws  SQLException;
 }
