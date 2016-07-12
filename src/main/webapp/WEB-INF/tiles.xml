@@ -1,9 +1,14 @@
-<?xml version="1.0" encoding="ISO-8859-1" ?>
+<?xml version="1.0" encoding="UTF-8" ?> <!--ISO-8859-1-->
 <!DOCTYPE tiles-definitions PUBLIC
         "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
         "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
-    <definition name="inquirer.testPage" template="/WEB-INF/jsp/inquirer.jsp">
+    <definition name="inquirer.testPage" template="/WEB-INF/jsp/wrapper.jsp">
+        <put-attribute name="title" value="This is the test page" cascade="true" />
+        <put-attribute name="header_message" value="Опросник на тему &quot;Lorem&quot;" cascade="true" />
+        <put-attribute name="head" value="/WEB-INF/jsp/head.jsp" />
+        <put-attribute name="page_footer" value="/WEB-INF/jsp/page_footer.jsp" />
+        <put-attribute name="test_content" value="/WEB-INF/jsp/test_content.jsp" />
     </definition>
     <definition name="inquirer.loginPage" template="/WEB-INF/jsp/login_page.jsp">
     </definition>
