@@ -1,13 +1,12 @@
-package com.inquirer.dao;
+package com.inquirer.services;
 
-import com.inquirer.models.Answer;
 import com.inquirer.models.Question;
-import com.inquirer.models.User;
 
 import java.sql.SQLException;
 import java.util.List;
 
-public interface QuestionDao {
+public interface QuestionService {
 
     public List<Question> getQuestions() throws SQLException;
+
 }
