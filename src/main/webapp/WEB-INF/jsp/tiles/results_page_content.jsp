@@ -4,11 +4,11 @@
     <h1><tiles:getAsString name="header_message"/></h1>
 </div>
 <div class="result_block">
-    <h2>Результат: 10 баллов</h2>
+    <h2>Результат: ${result} баллов</h2>
 </div>
 <div class="button_links_block">
     <form action="">
-        <input class="link" class="result_page_button" type="button" name="" value="Еще раз" onclick="location.href='./inquirer.html'">
-        <input class="link" class="result_page_button" type="button" name="" value="Выйти" onclick="location.href='./login_page.html'">
+        <input class="link" class="result_page_button" type="button" name="" value="Еще раз" onclick="location.href='../inquirer/test'">
+        <input class="link" class="result_page_button" type="button" name="" value="Выйти" onclick="location.href='../inquirer/login'">
     </form>
 </div>
