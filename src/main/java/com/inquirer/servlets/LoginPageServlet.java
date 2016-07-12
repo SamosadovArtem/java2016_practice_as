@@ -13,11 +13,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-/**
- * Created by Егор on 11.07.2016.
- */
 public class LoginPageServlet extends HttpServlet{
 
     @Override
@@ -33,8 +31,11 @@ public class LoginPageServlet extends HttpServlet{
         UserServiceImpl userLoginService = new UserServiceImpl();
 
         if(userLoginService.isUserExist(user)) {
+            HttpSession session = request.getSession();
+            user = userLoginService.getUserByName(user.getName());
+            session.setAttribute("user",user);
             response.sendRedirect("test");
-        } else{
+        } else {
             request.setAttribute("status","User not found");
             TilesContainer container = TilesAccess.getContainer(new ServletApplicationContext(request.getSession().getServletContext()));
             Request req = new ServletRequest(container.getApplicationContext(), request, response);

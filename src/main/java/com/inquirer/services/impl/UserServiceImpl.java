@@ -27,8 +27,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUserByName(String name) throws SQLException {
-        return userDao.getUserByName(name);
+    public User getUserByName(String name) {
+        try {
+            return userDao.getUserByName(name);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public boolean isUserExist(User user)  {
