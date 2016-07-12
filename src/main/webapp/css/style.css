@@ -160,3 +160,7 @@ input[type="password"]:focus{
     font-size: 20px;
     font-weight: 900;
 }
+.error_block {
+    font-size: 18px;
+    color: rgb(255, 0, 0);
+}
