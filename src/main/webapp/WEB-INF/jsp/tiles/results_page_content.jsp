@@ -4,7 +4,7 @@
     <h1><tiles:getAsString name="header_message"/></h1>
 </div>
 <div class="result_block">
-    <h2>Результат: ${result} баллов</h2>
+    <h2>Результат: ${result}</h2>
 </div>
 <div class="button_links_block">
     <form action="">
