@@ -13,6 +13,6 @@ mvn package
 
 - [x] .gitignore
 - [x] jetty deploy plugin
-- [ ] header + footer at tiles
-- [ ] index.html redirect to first page
+- [x] header + footer at tiles
+- [x] index.html redirect to first page
 - [ ] checkstyle + pmd + findbugs maven plugin
