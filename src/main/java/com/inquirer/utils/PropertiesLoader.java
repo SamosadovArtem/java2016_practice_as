@@ -1,4 +1,4 @@
-package com.inquirer.dao;
+package com.inquirer.utils;
 
 import com.mysql.fabric.jdbc.FabricMySQLDriver;
 import org.apache.log4j.Logger;
@@ -18,7 +18,6 @@ public class PropertiesLoader {
     private String url;
 
     public PropertiesLoader(){
-        loadDriver();
         loadProperties();
     }
 
@@ -37,18 +36,15 @@ public class PropertiesLoader {
         }
     }
 
-    private void loadDriver(){
-        try {
-            Driver driver = new FabricMySQLDriver();
-            DriverManager.registerDriver(driver);
-        } catch (SQLException e){
-            LOGER.error(e);
-        }
+    public String getUsername() {
+        return username;
     }
 
-    public PreparedStatement getStatement(String query) throws SQLException {
-        Connection con = DriverManager.getConnection(url,username,password);
-        PreparedStatement statement = con.prepareStatement(query);
-        return statement;
+    public String getPassword() {
+        return password;
+    }
+
+    public String getUrl() {
+        return url;
     }
 }

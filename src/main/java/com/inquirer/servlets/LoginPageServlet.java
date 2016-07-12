@@ -2,7 +2,7 @@ package com.inquirer.servlets;
 
 
 import com.inquirer.models.User;
-import com.inquirer.services.UserLoginService;
+import com.inquirer.services.impl.UserServiceImpl;
 import org.apache.tiles.TilesContainer;
 import org.apache.tiles.access.TilesAccess;
 import org.apache.tiles.request.Request;
@@ -31,9 +31,9 @@ public class LoginPageServlet extends HttpServlet{
         User user = new User();
         user.setName(request.getParameter("login"));
 
-        UserLoginService userLoginService = new UserLoginService();
+        UserServiceImpl userLoginService = new UserServiceImpl();
 
-        if(userLoginService.CheckUser(user)) {
+        if(userLoginService.isUserExist(user)) {
             response.sendRedirect("test");
         } else{
             request.setAttribute("status","User not found");

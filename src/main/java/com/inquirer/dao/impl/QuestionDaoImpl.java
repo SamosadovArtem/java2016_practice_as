@@ -1,17 +1,13 @@
-package com.inquirer.dao;
+package com.inquirer.dao.impl;
 
-import com.inquirer.models.Answer;
+import com.inquirer.dao.QuestionDao;
 import com.inquirer.models.Question;
-import com.inquirer.models.User;
-import com.mysql.fabric.jdbc.FabricMySQLDriver;
+import com.inquirer.utils.DaoHelper;
 import org.apache.log4j.Logger;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 
 public class QuestionDaoImpl implements QuestionDao {
 
@@ -19,13 +15,13 @@ public class QuestionDaoImpl implements QuestionDao {
 
     private static final Logger LOGER = Logger.getLogger(QuestionDaoImpl.class);
 
-    private PropertiesLoader propertiesLoader = new PropertiesLoader();
+    private DaoHelper daoHelper = new DaoHelper();
 
 
     public List<Question> getQuestions() throws SQLException {
         List<Question> questions = new ArrayList();
 
-        try (PreparedStatement statement = propertiesLoader.getStatement(SELECT_ALL_QUESTION_QUERY);
+        try (PreparedStatement statement = daoHelper.getStatement(SELECT_ALL_QUESTION_QUERY);
              ResultSet resultSet = statement.executeQuery()) {
 
             while (resultSet.next()) {

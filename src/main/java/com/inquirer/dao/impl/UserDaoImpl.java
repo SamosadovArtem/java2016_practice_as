@@ -1,6 +1,8 @@
-package com.inquirer.dao;
+package com.inquirer.dao.impl;
 
+import com.inquirer.dao.UserDao;
 import com.inquirer.models.User;
+import com.inquirer.utils.DaoHelper;
 import org.apache.log4j.Logger;
 
 import java.sql.*;
@@ -15,11 +17,11 @@ public class UserDaoImpl implements UserDao {
 
     private static final Logger LOGER = Logger.getLogger(QuestionDaoImpl.class);
 
-    private PropertiesLoader propertiesLoader = new PropertiesLoader();
+    private DaoHelper daoHelper = new DaoHelper();
 
     @Override
     public void addUser(User user) throws SQLException {
-        try (PreparedStatement statement = propertiesLoader.getStatement(ADD_USER_QUERY)) {
+        try (PreparedStatement statement = daoHelper.getStatement(ADD_USER_QUERY)) {
             statement.setString(1,user.getName());
             statement.setInt(2,user.getAge());
             statement.execute();
@@ -32,7 +34,7 @@ public class UserDaoImpl implements UserDao {
     public List<User> getUsers() throws SQLException {
         List<User> users = new ArrayList();
 
-        try (PreparedStatement statement = propertiesLoader.getStatement(SELECT_ALL_USER_QUERY);
+        try (PreparedStatement statement = daoHelper.getStatement(SELECT_ALL_USER_QUERY);
              ResultSet resultSet = statement.executeQuery()) {
 
             while (resultSet.next()) {
@@ -52,7 +54,7 @@ public class UserDaoImpl implements UserDao {
     @Override
     public User getUserByName(String name) throws SQLException {
         User user = null;
-        try (PreparedStatement statement = propertiesLoader.getStatement(GET_USER_BY_NAME_QUERY)) {
+        try (PreparedStatement statement = daoHelper.getStatement(GET_USER_BY_NAME_QUERY)) {
             statement.setString(1,name);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {

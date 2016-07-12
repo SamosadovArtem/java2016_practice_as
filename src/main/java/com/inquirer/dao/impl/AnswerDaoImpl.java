@@ -1,8 +1,10 @@
-package com.inquirer.dao;
+package com.inquirer.dao.impl;
 
 
+import com.inquirer.dao.AnswerDao;
 import com.inquirer.models.Answer;
 import com.inquirer.models.Question;
+import com.inquirer.utils.DaoHelper;
 import org.apache.log4j.Logger;
 
 import java.sql.PreparedStatement;
@@ -17,13 +19,13 @@ public class AnswerDaoImpl implements AnswerDao {
 
     private static final Logger LOGER = Logger.getLogger(AnswerDaoImpl.class);
 
-    private PropertiesLoader propertiesLoader = new PropertiesLoader();
+    private DaoHelper daoHelper = new DaoHelper();
 
     @Override
     public List<Answer> getAnswersForQuestion(Question question) throws SQLException {
         List<Answer> answers =  new ArrayList();
 
-        try (PreparedStatement statement = propertiesLoader.getStatement(SELECT_ANSWER_FOR_QUESTION_QUERY)) {
+        try (PreparedStatement statement = daoHelper.getStatement(SELECT_ANSWER_FOR_QUESTION_QUERY)) {
             statement.setInt(1,question.getId());
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
