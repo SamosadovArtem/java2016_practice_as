@@ -1,5 +1,9 @@
 package com.inquirer.servlets;
 
+import com.inquirer.exeptions.UserWithoutMarkExeption;
+import com.inquirer.models.User;
+import com.inquirer.services.ResultService;
+import com.inquirer.services.impl.ResultServiceImpl;
 import org.apache.tiles.TilesContainer;
 import org.apache.tiles.access.TilesAccess;
 import org.apache.tiles.request.Request;
@@ -11,13 +15,21 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-/**
- * Created by Егор on 11.07.2016.
- */
 public class ResultsPageServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        User user = (User) request.getSession().getAttribute("user");
+
+        ResultService resultService = new ResultServiceImpl();
+
+        try {
+            int result = resultService.getLastUserResult(user).getMark();
+            request.setAttribute("result", result);
+        } catch (UserWithoutMarkExeption userWithoutMarkExeption) {
+            request.setAttribute("result", "Вы не прошли ни одного теста");
+        }
+
         TilesContainer container = TilesAccess.getContainer(new ServletApplicationContext(request.getSession().getServletContext()));
         Request req = new ServletRequest(container.getApplicationContext(), request, response);
         container.render("inquirer.resultsPage", req);

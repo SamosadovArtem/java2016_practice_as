@@ -4,11 +4,14 @@ import com.inquirer.dao.UserDao;
 import com.inquirer.dao.impl.UserDaoImpl;
 import com.inquirer.models.User;
 import com.inquirer.services.UserService;
+import org.apache.log4j.Logger;
 
 import java.sql.SQLException;
 import java.util.List;
 
 public class UserServiceImpl implements UserService {
+
+    private static final Logger LOGER = Logger.getLogger(UserServiceImpl.class);
 
     private UserDao userDao;
 
@@ -27,8 +30,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getUserByName(String name) throws SQLException {
-        return userDao.getUserByName(name);
+    public User getUserByName(String name) {
+        try {
+            return userDao.getUserByName(name);
+        } catch (SQLException e) {
+            LOGER.error(e);
+        }
+        return null;
     }
 
     public boolean isUserExist(User user)  {
@@ -37,7 +45,7 @@ public class UserServiceImpl implements UserService {
         try {
             tempUser = userDao.getUserByName(user.getName());
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGER.error(e);
         }
         return tempUser!=null;
     }

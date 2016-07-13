@@ -52,7 +52,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public User getUserByName(String name) throws SQLException {
+    public User getUserByName(String name) {
         User user = null;
         try (PreparedStatement statement = daoHelper.getStatement(GET_USER_BY_NAME_QUERY)) {
             statement.setString(1,name);
