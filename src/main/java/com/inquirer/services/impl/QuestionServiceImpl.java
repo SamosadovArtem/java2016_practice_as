@@ -2,6 +2,7 @@ package com.inquirer.services.impl;
 
 import com.inquirer.dao.QuestionDao;
 import com.inquirer.dao.impl.QuestionDaoImpl;
+import com.inquirer.models.Answer;
 import com.inquirer.models.Question;
 import com.inquirer.services.QuestionService;
 
@@ -11,9 +12,15 @@ import java.util.List;
 public class QuestionServiceImpl implements QuestionService {
 
     private QuestionDao questionDao;
+//    private List<Question> questions;
 
     public QuestionServiceImpl(){
         questionDao = new QuestionDaoImpl();
+//        try {
+//            questions = getQuestions();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
     }
 
     @Override
@@ -21,4 +28,24 @@ public class QuestionServiceImpl implements QuestionService {
         return questionDao.getQuestions();
     }
 
+    @Override
+    public Question getQuestionByNumber(int number) {
+        Question question = null;
+        try {
+            question = questionDao.getQuestionByNumber(number);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return question;
+    }
+
+    public int getQuestionsAmount() {
+        List<Question> questions = null;
+        try {
+            questions = getQuestions();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return questions.size();
+    }
 }
