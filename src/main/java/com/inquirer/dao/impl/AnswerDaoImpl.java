@@ -16,6 +16,7 @@ import java.util.List;
 public class AnswerDaoImpl implements AnswerDao {
 
     private static final String SELECT_ANSWER_FOR_QUESTION_QUERY = "SELECT * FROM answer WHERE question = ?";
+    private static final String SELECT_ANSWER_BY_ID_QUERY = "SELECT * FROM answer WHERE answer.id = ?";
 
     private static final Logger LOGER = Logger.getLogger(AnswerDaoImpl.class);
 
@@ -41,5 +42,25 @@ public class AnswerDaoImpl implements AnswerDao {
         }
 
         return answers;
+    }
+
+    @Override
+    public Answer getAnswerById(int id) throws SQLException {
+        Answer answer = null;
+
+        try (PreparedStatement statement = daoHelper.getStatement(SELECT_ANSWER_BY_ID_QUERY)) {
+            statement.setInt(1,id);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                answer = new Answer();
+                answer.setId(resultSet.getInt("id"));
+                answer.setTitle(resultSet.getString("title"));
+                answer.setQuestion(resultSet.getInt("question"));
+                answer.setRight(resultSet.getBoolean("isRight"));
+            }
+        } catch (SQLException e) {
+            LOGER.error(e);
+        }
+        return answer;
     }
 }
