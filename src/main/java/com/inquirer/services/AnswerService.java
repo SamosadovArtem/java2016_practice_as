@@ -9,4 +9,5 @@ import java.util.List;
 public interface AnswerService {
 
     public List<Answer> getAnswersForQuestion(Question question) throws SQLException;
+    public  Answer getAnswerById(int id) throws SQLException;
 }
