@@ -27,6 +27,15 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>LogoutPageServlet</servlet-name>
+        <servlet-class>com.inquirer.servlets.LogOutServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LogoutPageServlet</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>ResultsPageServlet</servlet-name>
         <servlet-class>com.inquirer.servlets.ResultsPageServlet</servlet-class>
     </servlet>

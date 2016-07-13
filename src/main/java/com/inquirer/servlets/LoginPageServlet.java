@@ -20,9 +20,6 @@ public class LoginPageServlet extends HttpServlet{
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        HttpSession session = request.getSession();
-        session.invalidate();
-
         TilesContainer container = TilesAccess.getContainer(new ServletApplicationContext(request.getSession().getServletContext()));
         Request req = new ServletRequest(container.getApplicationContext(), request, response);
         container.render("inquirer.loginPage", req);
