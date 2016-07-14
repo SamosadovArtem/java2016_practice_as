@@ -47,7 +47,7 @@ public class UserServiceImpl implements UserService {
         } catch (SQLException e) {
             LOGER.error(e);
         }
-        return tempUser!=null;
+        return tempUser != null;
     }
 
 }
