@@ -20,7 +20,7 @@ public class AuthFilter implements Filter {
 
         String uri = request.getRequestURI();
 
-        if ((session!=null && session.getAttribute("user")!=null)||uri.endsWith("login")){
+        if ((session!=null && session.getAttribute("user")!=null)||uri.endsWith("login")||uri.endsWith("style.css")){
             filterChain.doFilter(servletRequest,servletResponse);
         } else {
             response.sendRedirect("login");
