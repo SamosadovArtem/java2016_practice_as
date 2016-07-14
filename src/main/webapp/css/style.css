@@ -45,7 +45,7 @@ body{
     text-align: center;
     position: absolute;
     bottom: 0;
-    left: 339px;
+    left: 349px;
     padding-bottom: 10px;
 }
 .footer {
@@ -80,6 +80,14 @@ body{
     background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
     background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
     text-decoration: none;
+}
+.link:active {
+    background: #fc6868;
+    background-image: -webkit-linear-gradient(top, #fc6868, #e03d3d);
+    background-image: -moz-linear-gradient(top, #fc6868, #e03d3d);
+    background-image: -ms-linear-gradient(top, #fc6868, #e03d3d);
+    background-image: -o-linear-gradient(top, #fc6868, #e03d3d);
+    background-image: linear-gradient(to bottom, #fc6868, #e03d3d);
 }
 .submit_block .link {
     -webkit-border-radius: 12px;

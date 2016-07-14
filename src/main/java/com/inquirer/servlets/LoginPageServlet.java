@@ -34,7 +34,7 @@ public class LoginPageServlet extends HttpServlet{
         UserServiceImpl userLoginService = new UserServiceImpl();
 
         if(userLoginService.isUserExist(user)) {
-            response.sendRedirect("test");
+            response.sendRedirect("test?question=1");
         } else{
             request.setAttribute("status","User not found");
             TilesContainer container = TilesAccess.getContainer(new ServletApplicationContext(request.getSession().getServletContext()));
