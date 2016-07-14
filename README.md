@@ -15,4 +15,4 @@ mvn package
 - [x] jetty deploy plugin
 - [x] header + footer at tiles
 - [x] index.html redirect to first page
-- [ ] checkstyle + pmd + findbugs maven plugin
+- [x] checkstyle + pmd + findbugs maven plugin
