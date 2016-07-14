@@ -10,4 +10,8 @@ public interface AnswerService {
 
     public List<Answer> getAnswersForQuestion(Question question) throws SQLException;
     public  Answer getAnswerById(int id) throws SQLException;
+    public void setUserAnswer(int id);
+    public int getTestResult();
+    public int getUserAnswerIdByQuestionNumber(int number);
+    public void clearUserAnswers();
 }

@@ -9,5 +9,5 @@ public interface QuestionService {
 
     public List<Question> getQuestions() throws SQLException;
     public Question getQuestionByNumber(int number) throws SQLException;
-
+    public int getQuestionsAmount();
 }

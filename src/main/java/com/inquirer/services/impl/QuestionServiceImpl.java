@@ -12,15 +12,9 @@ import java.util.List;
 public class QuestionServiceImpl implements QuestionService {
 
     private QuestionDao questionDao;
-//    private List<Question> questions;
 
     public QuestionServiceImpl(){
         questionDao = new QuestionDaoImpl();
-//        try {
-//            questions = getQuestions();
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
     }
 
     @Override
@@ -39,6 +33,7 @@ public class QuestionServiceImpl implements QuestionService {
         return question;
     }
 
+    @Override
     public int getQuestionsAmount() {
         List<Question> questions = null;
         try {

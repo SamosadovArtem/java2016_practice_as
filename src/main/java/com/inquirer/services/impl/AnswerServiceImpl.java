@@ -30,6 +30,7 @@ public class AnswerServiceImpl implements AnswerService {
         return answerDao.getAnswerById(id);
     }
 
+    @Override
     public void setUserAnswer(int id) {
         try {
             userAnswers.add(getAnswerById(id));
@@ -38,6 +39,7 @@ public class AnswerServiceImpl implements AnswerService {
         }
     }
 
+    @Override
     public int getTestResult() {
         int correctAnswers = 0;
         for (Answer currentAnswer:userAnswers) {
@@ -45,5 +47,26 @@ public class AnswerServiceImpl implements AnswerService {
                 correctAnswers++;
         }
         return correctAnswers;
+    }
+
+    @Override
+    public int getUserAnswerIdByQuestionNumber(int number) {
+        Answer userAnswer = null;
+        for (Answer tmpAnswer:userAnswers) {
+            if (tmpAnswer.getQuestion() == number) {
+                userAnswer = tmpAnswer;
+            }
+        }
+        if (userAnswer == null) {
+            return 0;
+        }
+        else {
+            return userAnswer.getId();
+        }
+    }
+
+    @Override
+    public void clearUserAnswers() {
+        userAnswers = null;
     }
 }
