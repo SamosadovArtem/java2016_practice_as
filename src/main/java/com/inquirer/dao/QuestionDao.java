@@ -10,4 +10,5 @@ import java.util.List;
 public interface QuestionDao {
 
     public List<Question> getQuestions() throws SQLException;
+    public Question getQuestionByNumber(int number) throws SQLException;
 }
