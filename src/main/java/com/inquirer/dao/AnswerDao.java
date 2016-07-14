@@ -9,4 +9,5 @@ import java.util.List;
 public interface AnswerDao {
 
     public List<Answer> getAnswersForQuestion(Question question) throws SQLException;
+    public  Answer getAnswerById(int id) throws SQLException;
 }

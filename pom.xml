@@ -56,6 +56,11 @@
             <artifactId>tiles-jsp</artifactId>
             <version>${tiles.version}</version>
         </dependency>
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+        </dependency>
     </dependencies>
     <build>
         <finalName>inquirer</finalName>

@@ -12,6 +12,7 @@ import java.util.List;
 public class QuestionDaoImpl implements QuestionDao {
 
     private static final String SELECT_ALL_QUESTION_QUERY = "SELECT * FROM question";
+    private static final String SELECT_QUESTION_BY_NUMBER_QUERY = "SELECT * FROM question WHERE id = ?";
 
     private static final Logger LOGER = Logger.getLogger(QuestionDaoImpl.class);
 
@@ -35,6 +36,25 @@ public class QuestionDaoImpl implements QuestionDao {
         }
 
         return questions;
+    }
+
+    @Override
+    public Question getQuestionByNumber(int number) throws SQLException {
+        Question question = null;
+
+        try (PreparedStatement statement = daoHelper.getStatement(SELECT_QUESTION_BY_NUMBER_QUERY)) {
+            statement.setInt(1, number);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                question = new Question();
+                question.setId(resultSet.getInt("id"));
+                question.setTitle(resultSet.getString("title"));
+            }
+        } catch (SQLException e){
+            LOGER.error(e);
+        }
+
+        return question;
     }
 
 }

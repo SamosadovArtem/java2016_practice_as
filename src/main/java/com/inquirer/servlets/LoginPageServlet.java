@@ -34,7 +34,7 @@ public class LoginPageServlet extends HttpServlet{
             HttpSession session = request.getSession();
             user = userLoginService.getUserByName(user.getName());
             session.setAttribute("user",user);
-            response.sendRedirect("test");
+            response.sendRedirect("test?question=1");
         } else {
             request.setAttribute("status","User not found");
             TilesContainer container = TilesAccess.getContainer(new ServletApplicationContext(request.getSession().getServletContext()));
