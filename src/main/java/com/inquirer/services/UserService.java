@@ -11,5 +11,5 @@ public interface UserService {
 
     public void addUser (User user) throws SQLException;
 
-    public User getUserByName(String name) throws  SQLException;
+    public User getUserByName(String name);
 }
