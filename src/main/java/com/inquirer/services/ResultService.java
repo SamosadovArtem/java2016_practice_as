@@ -8,4 +8,6 @@ public interface ResultService {
 
     public Result getLastUserResult(User user) throws UserWithoutMarkExeption;
 
+    public void addUserResult(Result result);
+
 }

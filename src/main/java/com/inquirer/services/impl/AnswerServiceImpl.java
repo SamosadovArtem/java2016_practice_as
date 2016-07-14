@@ -52,21 +52,20 @@ public class AnswerServiceImpl implements AnswerService {
     @Override
     public int getUserAnswerIdByQuestionNumber(int number) {
         Answer userAnswer = null;
-        for (Answer tmpAnswer:userAnswers) {
+        for (Answer tmpAnswer : userAnswers) {
             if (tmpAnswer.getQuestion() == number) {
                 userAnswer = tmpAnswer;
             }
         }
         if (userAnswer == null) {
             return 0;
-        }
-        else {
+        } else {
             return userAnswer.getId();
         }
     }
 
     @Override
     public void clearUserAnswers() {
-        userAnswers = null;
+        userAnswers = new ArrayList<>();
     }
 }

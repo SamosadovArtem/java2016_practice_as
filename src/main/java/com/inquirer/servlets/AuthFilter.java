@@ -20,7 +20,7 @@ public class AuthFilter implements Filter {
 
         String uri = request.getRequestURI();
 
-        if ((session!=null && session.getAttribute("user")!=null)||uri.endsWith("login")){
+        if ((session!=null && session.getAttribute("user")!=null)||uri.endsWith("login")||uri.matches(".*[css|jpg|png|gif|js]")){
             filterChain.doFilter(servletRequest,servletResponse);
         } else {
             response.sendRedirect("login");

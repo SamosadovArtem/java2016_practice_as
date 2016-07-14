@@ -19,4 +19,9 @@ public class ResultServiceImpl implements ResultService {
     public Result getLastUserResult(User user) throws UserWithoutMarkExeption {
         return resultDao.getLastUserResult(user);
     }
+
+    @Override
+    public void addUserResult(Result result) {
+        resultDao.addUserResult(result);
+    }
 }

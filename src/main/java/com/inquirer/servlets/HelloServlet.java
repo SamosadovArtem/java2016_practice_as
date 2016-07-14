@@ -14,14 +14,12 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Admin on 06.07.2016.
- */
 public class HelloServlet  extends HttpServlet {
     private AnswerServiceImpl answerService = new AnswerServiceImpl();
     private QuestionServiceImpl questionService = new QuestionServiceImpl();
@@ -56,8 +54,21 @@ public class HelloServlet  extends HttpServlet {
     }
 
     public void doPost(HttpServletRequest request,HttpServletResponse response) throws IOException, ServletException {
-        int id = Integer.parseInt(request.getParameter("userAnswerInput"));
-        answerService.setUserAnswer(id);
+
+        HttpSession session = request.getSession();
+
+        if (request.getParameter("userAnswerInput")!=null) {
+            int id = Integer.parseInt(request.getParameter("userAnswerInput"));
+
+
+            answerService.setUserAnswer(id);
+
+            if (questionService.getQuestionsAmount() == Integer.parseInt(request.getParameter("questionParameterNumber"))) {
+                session.setAttribute("userResult", answerService.getTestResult());
+                session.setAttribute("userAnswers", answerService);
+                //answerService.clearUserAnswers();
+            }
+        }
 
         response.sendRedirect("test?question=" + request.getParameter("questionParameterNumber"));
     }

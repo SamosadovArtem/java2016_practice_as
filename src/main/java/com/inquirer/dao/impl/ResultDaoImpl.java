@@ -15,6 +15,7 @@ public class ResultDaoImpl implements ResultDao {
 
     private static final String GET_LAST_USER_RESULT_QUERY = "SELECT * FROM result WHERE user = ? " +
             "ORDER BY id DESC LIMIT 1";
+    private static final String ADD_RESULT_QUERY = "INSERT INTO RESULT(user, mark) VALUES (?,?)";
     private static final Logger LOGER = Logger.getLogger(QuestionDaoImpl.class);
 
     private DaoHelper daoHelper = new DaoHelper();
@@ -41,5 +42,16 @@ public class ResultDaoImpl implements ResultDao {
         }
 
         return result;
+    }
+
+    @Override
+    public void addUserResult(Result result) {
+        try (PreparedStatement statement = daoHelper.getStatement(ADD_RESULT_QUERY)) {
+            statement.setInt(1,result.getUser());
+            statement.setInt(2,result.getMark());
+            statement.execute();
+        } catch (SQLException e){
+            LOGER.error(e);
+        }
     }
 }
