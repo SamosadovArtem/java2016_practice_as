@@ -20,7 +20,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HelloServlet  extends HttpServlet {
+public class TestPageServlet extends HttpServlet {
     private AnswerServiceImpl answerService = new AnswerServiceImpl();
     private QuestionServiceImpl questionService = new QuestionServiceImpl();
 
@@ -30,7 +30,7 @@ public class HelloServlet  extends HttpServlet {
         Question currentQuestion = questionService.getQuestionByNumber(Integer.parseInt(request.getParameter("question")));
         String questionTitle = currentQuestion.getTitle();
 
-        List<Answer> answers = null;
+        List<Answer> answers = new ArrayList<>();
         try {
             answers = answerService.getAnswersForQuestion(currentQuestion);
         } catch (SQLException e) {
@@ -39,6 +39,7 @@ public class HelloServlet  extends HttpServlet {
 
         int currentUserAnswerId = answerService.getUserAnswerIdByQuestionNumber(Integer.parseInt(request.getParameter("question")));
 
+        request.setAttribute("userAnswersAmount", answerService.getUserAnswersAmount());
         request.setAttribute("currentUserAnswerId", currentUserAnswerId);
         request.setAttribute("questionsAmount", questionService.getQuestionsAmount());
         request.setAttribute("questionNubmer", request.getParameter("question"));
@@ -63,7 +64,7 @@ public class HelloServlet  extends HttpServlet {
 
             answerService.setUserAnswer(id);
 
-            if (questionService.getQuestionsAmount() == Integer.parseInt(request.getParameter("questionParameterNumber"))) {
+            if (questionService.getQuestionsAmount() == answerService.getUserAnswersAmount()) {
                 session.setAttribute("userResult", answerService.getTestResult());
                 session.setAttribute("userAnswers", answerService);
                 //answerService.clearUserAnswers();

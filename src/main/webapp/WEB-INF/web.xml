@@ -10,7 +10,7 @@
     </listener>
     <servlet>
         <servlet-name>HelloServlet</servlet-name>
-        <servlet-class>com.inquirer.servlets.HelloServlet</servlet-class>
+        <servlet-class>com.inquirer.servlets.TestPageServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HelloServlet</servlet-name>
