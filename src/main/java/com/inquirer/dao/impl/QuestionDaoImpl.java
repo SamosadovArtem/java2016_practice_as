@@ -33,6 +33,8 @@ public class QuestionDaoImpl implements QuestionDao {
             }
         } catch (SQLException e){
             LOGER.error(e);
+        } finally {
+            daoHelper.closeConnection();
         }
 
         return questions;
@@ -40,7 +42,7 @@ public class QuestionDaoImpl implements QuestionDao {
 
     @Override
     public Question getQuestionByNumber(int number) throws SQLException {
-        Question question = null;
+        Question question = new Question();
 
         try (PreparedStatement statement = daoHelper.getStatement(SELECT_QUESTION_BY_NUMBER_QUERY)) {
             statement.setInt(1, number);
@@ -52,6 +54,8 @@ public class QuestionDaoImpl implements QuestionDao {
             }
         } catch (SQLException e){
             LOGER.error(e);
+        } finally {
+            daoHelper.closeConnection();
         }
 
         return question;

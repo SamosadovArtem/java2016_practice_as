@@ -36,6 +36,9 @@ public class ResultDaoImpl implements ResultDao {
         } catch (SQLException e) {
             LOGER.error(e);
         }
+        finally {
+            daoHelper.closeConnection();
+        }
 
         if (result==null){
             throw new UserWithoutMarkExeption("User have no marks");
@@ -52,6 +55,8 @@ public class ResultDaoImpl implements ResultDao {
             statement.execute();
         } catch (SQLException e){
             LOGER.error(e);
+        } finally {
+            daoHelper.closeConnection();
         }
     }
 }

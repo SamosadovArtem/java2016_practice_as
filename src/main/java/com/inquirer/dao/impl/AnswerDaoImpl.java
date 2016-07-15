@@ -39,6 +39,8 @@ public class AnswerDaoImpl implements AnswerDao {
             }
         } catch (SQLException e){
             LOGER.error(e);
+        } finally {
+            daoHelper.closeConnection();
         }
 
         return answers;
@@ -46,7 +48,7 @@ public class AnswerDaoImpl implements AnswerDao {
 
     @Override
     public Answer getAnswerById(int id) throws SQLException {
-        Answer answer = null;
+        Answer answer = new Answer();
 
         try (PreparedStatement statement = daoHelper.getStatement(SELECT_ANSWER_BY_ID_QUERY)) {
             statement.setInt(1,id);
@@ -60,6 +62,8 @@ public class AnswerDaoImpl implements AnswerDao {
             }
         } catch (SQLException e) {
             LOGER.error(e);
+        } finally {
+            daoHelper.closeConnection();
         }
         return answer;
     }

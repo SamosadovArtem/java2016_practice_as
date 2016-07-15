@@ -47,13 +47,16 @@ public class UserDaoImpl implements UserDao {
         } catch (SQLException e){
             LOGER.error(e);
         }
+        finally {
+            daoHelper.closeConnection();
+        }
 
         return users;
     }
 
     @Override
     public User getUserByName(String name) {
-        User user = null;
+        User user = new User();
         try (PreparedStatement statement = daoHelper.getStatement(GET_USER_BY_NAME_QUERY)) {
             statement.setString(1,name);
             ResultSet resultSet = statement.executeQuery();
@@ -65,6 +68,8 @@ public class UserDaoImpl implements UserDao {
             }
         } catch (SQLException e) {
             LOGER.error(e);
+        } finally {
+            daoHelper.closeConnection();
         }
         return user;
     }
