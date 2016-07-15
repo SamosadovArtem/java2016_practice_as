@@ -5,6 +5,7 @@ import com.inquirer.dao.impl.AnswerDaoImpl;
 import com.inquirer.models.Answer;
 import com.inquirer.models.Question;
 import com.inquirer.services.AnswerService;
+import org.apache.log4j.Logger;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -14,6 +15,8 @@ public class AnswerServiceImpl implements AnswerService {
 
     private AnswerDao answerDao;
     private List<Answer> userAnswers;
+
+    private static final Logger LOGER = Logger.getLogger(AnswerServiceImpl.class);
 
     public AnswerServiceImpl(){
         answerDao = new AnswerDaoImpl();
@@ -35,7 +38,7 @@ public class AnswerServiceImpl implements AnswerService {
         try {
             userAnswers.add(getAnswerById(id));
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGER.error(e);
         }
     }
 
@@ -57,11 +60,7 @@ public class AnswerServiceImpl implements AnswerService {
                 userAnswer = tmpAnswer;
             }
         }
-        if (userAnswer == null) {
-            return 0;
-        } else {
             return userAnswer.getId();
-        }
     }
 
     @Override

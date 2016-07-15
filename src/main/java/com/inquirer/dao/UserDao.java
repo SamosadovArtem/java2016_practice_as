@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface UserDao {
 
-    public void addUser(User user) throws SQLException;
+    void addUser(User user) throws SQLException;
 
-    public List<User> getUsers() throws SQLException;
+    List<User> getUsers() throws SQLException;
 
-    public User getUserByName(String name) throws  SQLException;
+    User getUserByName(String name) throws  SQLException;
 }

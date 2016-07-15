@@ -7,9 +7,9 @@ import java.util.List;
 
 public interface UserService {
 
-    public List<User> getUsers() throws SQLException;
+    List<User> getUsers() throws SQLException;
 
-    public void addUser (User user) throws SQLException;
+    void addUser (User user) throws SQLException;
 
-    public User getUserByName(String name);
+    User getUserByName(String name);
 }

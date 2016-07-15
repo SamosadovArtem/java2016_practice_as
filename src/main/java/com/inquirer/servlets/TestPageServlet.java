@@ -4,6 +4,7 @@ import com.inquirer.models.Answer;
 import com.inquirer.models.Question;
 import com.inquirer.services.impl.AnswerServiceImpl;
 import com.inquirer.services.impl.QuestionServiceImpl;
+import org.apache.log4j.Logger;
 import org.apache.tiles.TilesContainer;
 import org.apache.tiles.access.TilesAccess;
 import org.apache.tiles.request.Request;
@@ -21,6 +22,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TestPageServlet extends HttpServlet {
+
+    private static final Logger LOGER = Logger.getLogger(TestPageServlet.class);
+
     private AnswerServiceImpl answerService = new AnswerServiceImpl();
     private QuestionServiceImpl questionService = new QuestionServiceImpl();
 
@@ -34,7 +38,7 @@ public class TestPageServlet extends HttpServlet {
         try {
             answers = answerService.getAnswersForQuestion(currentQuestion);
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGER.error(e);
         }
 
         int currentUserAnswerId = answerService.getUserAnswerIdByQuestionNumber(Integer.parseInt(request.getParameter("question")));

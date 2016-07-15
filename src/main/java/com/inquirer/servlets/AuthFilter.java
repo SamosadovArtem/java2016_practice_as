@@ -1,5 +1,7 @@
 package com.inquirer.servlets;
 
+import com.inquirer.models.User;
+
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,9 +20,9 @@ public class AuthFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
         HttpSession session = request.getSession(false);
 
-        String uri = request.getRequestURI();
+            String uri = request.getRequestURI();
 
-        if ((session!=null && session.getAttribute("user")!=null)||uri.endsWith("login")||uri.matches(".*[css|jpg|png|gif|js]")){
+        if ((session!=null && session.getAttribute("user")!=null)||uri.endsWith("login")||uri.endsWith("css")){
             filterChain.doFilter(servletRequest,servletResponse);
         } else {
             response.sendRedirect("login");

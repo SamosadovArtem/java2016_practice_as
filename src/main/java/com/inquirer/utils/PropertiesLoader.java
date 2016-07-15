@@ -1,12 +1,9 @@
 package com.inquirer.utils;
 
-import com.mysql.fabric.jdbc.FabricMySQLDriver;
 import org.apache.log4j.Logger;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.*;
 import java.util.Properties;
 
 public class PropertiesLoader {

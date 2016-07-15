@@ -2,14 +2,16 @@ package com.inquirer.services.impl;
 
 import com.inquirer.dao.QuestionDao;
 import com.inquirer.dao.impl.QuestionDaoImpl;
-import com.inquirer.models.Answer;
 import com.inquirer.models.Question;
 import com.inquirer.services.QuestionService;
+import org.apache.log4j.Logger;
 
 import java.sql.SQLException;
 import java.util.List;
 
 public class QuestionServiceImpl implements QuestionService {
+
+    private static final Logger LOGER = Logger.getLogger(QuestionServiceImpl.class);
 
     private QuestionDao questionDao;
 
@@ -28,7 +30,7 @@ public class QuestionServiceImpl implements QuestionService {
         try {
             question = questionDao.getQuestionByNumber(number);
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGER.error(e);
         }
         return question;
     }
@@ -39,7 +41,7 @@ public class QuestionServiceImpl implements QuestionService {
         try {
             questions = getQuestions();
         } catch (SQLException e) {
-            e.printStackTrace();
+            LOGER.error(e);
         }
         return questions.size();
     }

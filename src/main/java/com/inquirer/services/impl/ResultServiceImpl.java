@@ -7,16 +7,17 @@ import com.inquirer.models.Result;
 import com.inquirer.models.User;
 import com.inquirer.services.ResultService;
 
+
 public class ResultServiceImpl implements ResultService {
 
-    ResultDao resultDao;
+    private ResultDao resultDao;
 
     public ResultServiceImpl(){
         resultDao = new ResultDaoImpl();
     }
 
     @Override
-    public Result getLastUserResult(User user) throws UserWithoutMarkExeption {
+    public Result getLastUserResult(User user) throws UserWithoutMarkExeption{
         return resultDao.getLastUserResult(user);
     }
 

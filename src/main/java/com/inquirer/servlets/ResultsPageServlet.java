@@ -1,6 +1,5 @@
 package com.inquirer.servlets;
 
-import com.inquirer.dao.ResultDao;
 import com.inquirer.exeptions.UserWithoutMarkExeption;
 import com.inquirer.models.Result;
 import com.inquirer.models.User;
@@ -39,7 +38,7 @@ public class ResultsPageServlet extends HttpServlet {
         try {
             int result = resultService.getLastUserResult(user).getMark();
             request.setAttribute("result", result);
-        } catch (UserWithoutMarkExeption userWithoutMarkExeption) {
+        } catch (UserWithoutMarkExeption ex) {
             String message = "Вы не прошли ни одного теста";
             String s = new String(message.getBytes(), "UTF-8");
             request.setAttribute("result", s);

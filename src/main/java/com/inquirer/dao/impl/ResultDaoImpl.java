@@ -21,7 +21,7 @@ public class ResultDaoImpl implements ResultDao {
     private DaoHelper daoHelper = new DaoHelper();
 
     @Override
-    public Result getLastUserResult(User user) throws UserWithoutMarkExeption {
+    public Result getLastUserResult(User user) throws UserWithoutMarkExeption{
         Result result = null;
 
         try (PreparedStatement statement = daoHelper.getStatement(GET_LAST_USER_RESULT_QUERY)) {

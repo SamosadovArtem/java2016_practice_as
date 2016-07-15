@@ -6,8 +6,8 @@ import com.inquirer.models.User;
 
 public interface ResultDao {
 
-    public Result getLastUserResult(User user) throws UserWithoutMarkExeption;
+    Result getLastUserResult(User user) throws UserWithoutMarkExeption;
 
-    public void addUserResult(Result result);
+    void addUserResult(Result result);
 
 }
