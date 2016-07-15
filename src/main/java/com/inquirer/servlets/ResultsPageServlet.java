@@ -40,7 +40,9 @@ public class ResultsPageServlet extends HttpServlet {
             int result = resultService.getLastUserResult(user).getMark();
             request.setAttribute("result", result);
         } catch (UserWithoutMarkExeption userWithoutMarkExeption) {
-            request.setAttribute("result", "Вы не прошли ни одного теста");
+            String message = "Вы не прошли ни одного теста";
+            String s = new String(message.getBytes(), "UTF-8");
+            request.setAttribute("result", s);
         }
 
         TilesContainer container = TilesAccess.getContainer(new ServletApplicationContext(request.getSession().getServletContext()));
