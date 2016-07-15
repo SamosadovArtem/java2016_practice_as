@@ -51,7 +51,7 @@ public class AnswerServiceImpl implements AnswerService {
 
     @Override
     public int getUserAnswerIdByQuestionNumber(int number) {
-        Answer userAnswer = null;
+        Answer userAnswer = new Answer();
         for (Answer tmpAnswer : userAnswers) {
             if (tmpAnswer.getQuestion() == number) {
                 userAnswer = tmpAnswer;
@@ -67,5 +67,10 @@ public class AnswerServiceImpl implements AnswerService {
     @Override
     public void clearUserAnswers() {
         userAnswers = new ArrayList<>();
+    }
+
+    @Override
+    public int getUserAnswersAmount() {
+        return userAnswers.size();
     }
 }

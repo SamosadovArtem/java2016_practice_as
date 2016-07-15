@@ -14,4 +14,5 @@ public interface AnswerService {
     public int getTestResult();
     public int getUserAnswerIdByQuestionNumber(int number);
     public void clearUserAnswers();
+    public int getUserAnswersAmount();
 }
