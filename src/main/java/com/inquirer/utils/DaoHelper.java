@@ -12,6 +12,7 @@ public class DaoHelper {
     public DaoHelper(){
         loadDriver();
     }
+    public Connection con;
 
     private void loadDriver(){
         try {
@@ -27,8 +28,15 @@ public class DaoHelper {
         String url = propertiesLoader.getUrl();
         String username = propertiesLoader.getUsername();
         String password = propertiesLoader.getPassword();
-        Connection con = DriverManager.getConnection(url,username,password);
+        con = DriverManager.getConnection(url,username,password);
         PreparedStatement statement = con.prepareStatement(query);
         return statement;
+    }
+    public void closeConnection() {
+        try {
+            con.close();
+        } catch (SQLException e) {
+            LOGER.error(e);
+        }
     }
 }
