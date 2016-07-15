@@ -22,13 +22,13 @@ primary key (id)
 
 create table question (
 id mediumint not null auto_increment,
-title varchar(50),
+title text,
 primary key (id)
 );
 
 create table answer (
 id mediumint not null auto_increment,
-title varchar (50),
+title text,
 question int unsigned not null references question(id),
 isRight bool,
 primary key (id)
@@ -48,66 +48,34 @@ primary key (id)
 insert into user(name,age) values ('admin', 20);
 insert into user(name,age) values ('test user', 25);
 
-insert into question(title) values ('Question 1');
+insert into question(title) values ('Что такое Servlet?');
 
-insert into answer(title, question, isRight) values ( '1', 1, false);
-insert into answer(title, question, isRight) values ( '2', 1, false);
-insert into answer(title, question, isRight) values ( '3', 1, true);
-insert into answer(title, question, isRight) values ( '4', 1, false);
+insert into answer(title, question, isRight) values ( 'Библиотека', 1, false);
+insert into answer(title, question, isRight) values ( 'Класс', 1, false);
+insert into answer(title, question, isRight) values ( 'Интерфейс', 1, true);
+insert into answer(title, question, isRight) values ( 'Салат из овощей', 1, false);
 
-insert into question(title) values ('Question 2');
+insert into question(title) values ('Для чего нужен web.xml файл?');
 
-insert into answer(title, question, isRight) values ( '1', 2, false);
-insert into answer(title, question, isRight) values ( '2', 2, true);
-insert into answer(title, question, isRight) values ( '3', 2, false);
+insert into answer(title, question, isRight) values ( 'Определяет перечень используемых url', 2, false);
+insert into answer(title, question, isRight) values ( 'Определяет соответствие сервлет и отображаемых ими jsp файлов', 2, false);
+insert into answer(title, question, isRight) values ( 'Определяет, какие URL будут передаваться определенному сервлету', 2, true);
 
-insert into question(title) values ('Question 3');
+insert into question(title) values ('Что есть jsp файл?');
 
-insert into answer(title, question, isRight) values ( '1', 3, false);
-insert into answer(title, question, isRight) values ( '2', 3, true);
-insert into answer(title, question, isRight) values ( '3', 3, false);
+insert into answer(title, question, isRight) values ( 'Сервлет', 3, true);
+insert into answer(title, question, isRight) values ( 'Подтип html документа', 3, false);
 
-insert into question(title) values ('Question 4');
+insert into question(title) values ('В чем различие между redirect и forward?');
 
-insert into answer(title, question, isRight) values ( '1', 4, true);
-insert into answer(title, question, isRight) values ( '2', 4, false);
+insert into answer(title, question, isRight) values ( 'Redirect возвращает на предыдущую страницу, Forward на ранее не посещенную', 4, false);
+insert into answer(title, question, isRight) values ( 'Redirect возвращает на текущую страницу в случае ошибки, Forward отправляет по указанной ссылке', 4, false);
+insert into answer(title, question, isRight) values ( 'Redirect посылает ответ браузеру, который затем делает запрос на новый url, Forward пересылает запрос на целевой url на сервере', 4, true);
 
-insert into question(title) values ('Question 5');
+insert into question(title) values ('В чем отличие методов GET и POST?');
 
-insert into answer(title, question, isRight) values ( '1', 5, false);
-insert into answer(title, question, isRight) values ( '2', 5, false);
-insert into answer(title, question, isRight) values ( '3', 5, true);
-
-insert into question(title) values ('Question 6');
-
-insert into answer(title, question, isRight) values ( '1', 6, false);
-insert into answer(title, question, isRight) values ( '2', 6, true);
-insert into answer(title, question, isRight) values ( '3', 6, false);
-insert into answer(title, question, isRight) values ( '4', 6, false);
-
-insert into question(title) values ('Question 7');
-
-insert into answer(title, question, isRight) values ( '1', 7, false);
-insert into answer(title, question, isRight) values ( '2', 7, true);
-insert into answer(title, question, isRight) values ( '3', 7, false);
-
-insert into question(title) values ('Question 8');
-
-insert into answer(title, question, isRight) values ( '1', 8, true);
-insert into answer(title, question, isRight) values ( '2', 8, false);
-
-insert into question(title) values ('Question 9');
-
-insert into answer(title, question, isRight) values ( '1', 9, false);
-insert into answer(title, question, isRight) values ( '2', 9, false);
-insert into answer(title, question, isRight) values ( '3', 9, false);
-insert into answer(title, question, isRight) values ( '4', 9, true);
-
-insert into question(title) values ('Question 10');
-
-insert into answer(title, question, isRight) values ( '1', 10, false);
-insert into answer(title, question, isRight) values ( '2', 10, true);
-insert into answer(title, question, isRight) values ( '3', 10, false);
+insert into answer(title, question, isRight) values ( 'GET передает данные серверу используя URL, когда POST передает данные, используя тело HTTP запроса.', 5, true);
+insert into answer(title, question, isRight) values ( 'GET забирает данные со страницы, POST отправляет их на страницу', 5, false);
 
 insert into result(user,mark) values (1,10);
 insert into result(user,mark) values (1,8);

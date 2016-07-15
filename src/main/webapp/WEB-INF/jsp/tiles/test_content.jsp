@@ -50,11 +50,18 @@
         <c:if test="${param.question == questionsAmount}">
             <c:set var="buttonText" value="Конец"/>
             <c:set var="destination" value="../inquirer/results"/>
+            <c:if test="${userAnswersAmount == questionsAmount}">
+                <c:set var="disableForward" value=""/>
+            </c:if>
+            <c:if test="${userAnswersAmount < questionsAmount}">
+                <c:set var="disableForward" value="disabled"/>
+            </c:if>
         </c:if>
         <c:if test="${param.question < questionsAmount}">
             <c:set var="buttonText" value="Вперед"/>
             <c:set var="destination" value="../inquirer/test?question=${nextQuestionNumber}"/>
+            <c:set var="disableForward" value=""/>
         </c:if>
-        <input class="link" type="button" name="forward" value="${buttonText}" onclick="location.href='${destination}'">
+        <input ${disableForward} class="link" type="button" name="forward" value="${buttonText}" onclick="location.href='${destination}'">
     </form>
 </div>
