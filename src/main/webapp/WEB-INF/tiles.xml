@@ -4,8 +4,8 @@
         "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
     <definition name="inquirer.testPage" template="/WEB-INF/jsp/layouts/template.jsp">
-        <put-attribute name="title" value="This is the test page" cascade="true" />
-        <put-attribute name="header_message" value="ÐÐ¿ÑÐ¾ÑÐ½Ð¸Ðº Ð½Ð° ÑÐµÐ¼Ñ &quot;Lorem&quot;" cascade="true" />
+        <put-attribute name="title" value="Test page" cascade="true" />
+        <put-attribute name="header_message" value="Опросник на тему &quot;Java-web&quot;" cascade="true" />
         <put-attribute name="head" value="/WEB-INF/jsp/tiles/head.jsp" />
         <put-attribute name="page_footer" value="/WEB-INF/jsp/tiles/page_footer.jsp" />
         <put-attribute name="test_content" value="/WEB-INF/jsp/tiles/test_content.jsp" />
