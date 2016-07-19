@@ -5,9 +5,39 @@
          version="3.1">
 
     <display-name>inquirer</display-name>
+
+    <!--
     <listener>
         <listener-class>org.apache.tiles.web.startup.simple.SimpleTilesListener</listener-class>
     </listener>
+    -->
+
+    <!-- Spring -->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>/WEB-INF/applicationContext.xml</param-value>
+    </context-param>
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    <servlet>
+        <servlet-name>dispatcher</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <load-on-startup>2</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>dispatcher</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+    <!-- Spring -->
+
+    <!-- OLD -->
+    <!--
     <servlet>
         <servlet-name>HelloServlet</servlet-name>
         <servlet-class>com.inquirer.servlets.TestPageServlet</servlet-class>
@@ -43,6 +73,8 @@
         <servlet-name>ResultsPageServlet</servlet-name>
         <url-pattern>/results</url-pattern>
     </servlet-mapping>
+    -->
+    <!-- OLD -->
 
 
     <filter>
