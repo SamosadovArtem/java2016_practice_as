@@ -13,12 +13,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 @Repository
-public class ResultDaoImpl implements ResultDao {
+public class ResultRepository implements ResultDao {
 
     private static final String GET_LAST_USER_RESULT_QUERY = "SELECT * FROM result WHERE user = ? " +
             "ORDER BY id DESC LIMIT 1";
     private static final String ADD_RESULT_QUERY = "INSERT INTO RESULT(user, mark) VALUES (?,?)";
-    private static final Logger LOGER = Logger.getLogger(QuestionDaoImpl.class);
+    private static final Logger LOGER = Logger.getLogger(QuestionRepository.class);
 
     private DaoHelper daoHelper = new DaoHelper();
 

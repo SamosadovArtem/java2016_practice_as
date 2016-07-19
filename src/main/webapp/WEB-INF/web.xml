@@ -40,7 +40,7 @@
     <!--
     <servlet>
         <servlet-name>HelloServlet</servlet-name>
-        <servlet-class>com.inquirer.servlets.TestPageServlet</servlet-class>
+        <servlet-class>com.inquirer.controllerer.TestPageServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>HelloServlet</servlet-name>
@@ -49,7 +49,7 @@
 
     <servlet>
         <servlet-name>LoginPageServlet</servlet-name>
-        <servlet-class>com.inquirer.servlets.LoginPageServlet</servlet-class>
+        <servlet-class>com.inquirer.controllerer.LoginPageServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginPageServlet</servlet-name>
@@ -58,7 +58,7 @@
 
     <servlet>
         <servlet-name>LogoutPageServlet</servlet-name>
-        <servlet-class>com.inquirer.servlets.LogOutServlet</servlet-class>
+        <servlet-class>com.inquirer.controllerer.LogOutServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LogoutPageServlet</servlet-name>
@@ -67,7 +67,7 @@
 
     <servlet>
         <servlet-name>ResultsPageServlet</servlet-name>
-        <servlet-class>com.inquirer.servlets.ResultsPageServlet</servlet-class>
+        <servlet-class>com.inquirer.controllerer.ResultsPageServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ResultsPageServlet</servlet-name>
@@ -79,7 +79,7 @@
 
     <filter>
         <filter-name>AuthenticationFilter</filter-name>
-        <filter-class>com.inquirer.servlets.AuthFilter</filter-class>
+        <filter-class>com.inquirer.controller.AuthFilter</filter-class>
     </filter>
 
     <filter-mapping>

@@ -1,6 +1,4 @@
-package com.inquirer.servlets;
-
-import com.inquirer.models.User;
+package com.inquirer.controller;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;

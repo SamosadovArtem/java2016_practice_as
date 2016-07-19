@@ -1,4 +1,4 @@
-package com.inquirer.servlets;
+package com.inquirer.controller;
 
 import com.inquirer.exeptions.UserWithoutMarkExeption;
 import com.inquirer.models.Result;
@@ -15,7 +15,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -23,9 +22,8 @@ import java.io.IOException;
 
 @Controller
 @RequestMapping("results")
-public class ResultsPageServlet extends HttpServlet {
+public class ResultsPageController {
 
-    @Override
     @RequestMapping(method = RequestMethod.GET)
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         User user = (User) request.getSession().getAttribute("user");

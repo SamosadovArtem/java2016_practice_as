@@ -11,13 +11,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class UserDaoImpl implements UserDao {
+public class UserRepository implements UserDao {
 
     private static final String SELECT_ALL_USER_QUERY = "SELECT * FROM user";
     private static final String ADD_USER_QUERY = "INSERT INTO user(name,age) VALUES (?,?)";
     private static final String GET_USER_BY_NAME_QUERY = "SELECT * FROM user WHERE name = ?";
 
-    private static final Logger LOGER = Logger.getLogger(QuestionDaoImpl.class);
+    private static final Logger LOGER = Logger.getLogger(QuestionRepository.class);
 
     private DaoHelper daoHelper = new DaoHelper();
 

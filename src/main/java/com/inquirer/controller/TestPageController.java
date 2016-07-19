@@ -1,4 +1,4 @@
-package com.inquirer.servlets;
+package com.inquirer.controller;
 
 import com.inquirer.models.Answer;
 import com.inquirer.models.Question;
@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -26,14 +25,13 @@ import java.util.List;
 
 @Controller
 @RequestMapping("test")
-public class TestPageServlet extends HttpServlet {
+public class TestPageController {
 
-    private static final Logger LOGER = Logger.getLogger(TestPageServlet.class);
+    private static final Logger LOGER = Logger.getLogger(TestPageController.class);
 
     private AnswerServiceImpl answerService = new AnswerServiceImpl();
     private QuestionServiceImpl questionService = new QuestionServiceImpl();
 
-    @Override
     @RequestMapping(method = RequestMethod.GET)
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 

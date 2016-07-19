@@ -1,7 +1,7 @@
 package com.inquirer.services.impl;
 
 import com.inquirer.dao.AnswerDao;
-import com.inquirer.dao.impl.AnswerDaoImpl;
+import com.inquirer.dao.impl.AnswerRepository;
 import com.inquirer.models.Answer;
 import com.inquirer.models.Question;
 import com.inquirer.services.AnswerService;
@@ -21,7 +21,7 @@ public class AnswerServiceImpl implements AnswerService {
     private static final Logger LOGER = Logger.getLogger(AnswerServiceImpl.class);
 
     public AnswerServiceImpl(){
-        answerDao = new AnswerDaoImpl();
+        answerDao = new AnswerRepository();
         userAnswers = new ArrayList<>();
     }
 

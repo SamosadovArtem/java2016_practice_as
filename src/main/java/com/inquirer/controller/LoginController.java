@@ -1,4 +1,4 @@
-package com.inquirer.servlets;
+package com.inquirer.controller;
 
 
 import com.inquirer.models.User;
@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -21,9 +20,8 @@ import java.io.IOException;
 
 @Controller
 @RequestMapping("login")
-public class LoginPageServlet extends HttpServlet{
+public class LoginController {
 
-    @Override
     @RequestMapping(method = RequestMethod.GET)
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         TilesContainer container = TilesAccess.getContainer(new ServletApplicationContext(request.getSession().getServletContext()));

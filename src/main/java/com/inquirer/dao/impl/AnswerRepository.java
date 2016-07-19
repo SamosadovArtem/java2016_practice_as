@@ -15,12 +15,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class AnswerDaoImpl implements AnswerDao {
+public class AnswerRepository implements AnswerDao {
 
     private static final String SELECT_ANSWER_FOR_QUESTION_QUERY = "SELECT * FROM answer WHERE question = ?";
     private static final String SELECT_ANSWER_BY_ID_QUERY = "SELECT * FROM answer WHERE answer.id = ?";
 
-    private static final Logger LOGER = Logger.getLogger(AnswerDaoImpl.class);
+    private static final Logger LOGER = Logger.getLogger(AnswerRepository.class);
 
     private DaoHelper daoHelper = new DaoHelper();
 

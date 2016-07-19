@@ -11,12 +11,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class QuestionDaoImpl implements QuestionDao {
+public class QuestionRepository implements QuestionDao {
 
     private static final String SELECT_ALL_QUESTION_QUERY = "SELECT * FROM question";
     private static final String SELECT_QUESTION_BY_NUMBER_QUERY = "SELECT * FROM question WHERE id = ?";
 
-    private static final Logger LOGER = Logger.getLogger(QuestionDaoImpl.class);
+    private static final Logger LOGER = Logger.getLogger(QuestionRepository.class);
 
     private DaoHelper daoHelper = new DaoHelper();
 

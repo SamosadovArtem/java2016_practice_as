@@ -21,7 +21,7 @@
                    cache-period="31556926"/>
 
 
-    <context:component-scan base-package="com.inquirer.servlets"/>
+    <context:component-scan base-package="com.inquirer"/>
 
     <bean id="tilesConfigurer"
           class="org.springframework.web.servlet.view.tiles3.TilesConfigurer"
