@@ -6,8 +6,9 @@ import com.inquirer.exeptions.UserWithoutMarkExeption;
 import com.inquirer.models.Result;
 import com.inquirer.models.User;
 import com.inquirer.services.ResultService;
+import org.springframework.stereotype.Service;
 
-
+@Service
 public class ResultServiceImpl implements ResultService {
 
     private ResultDao resultDao;

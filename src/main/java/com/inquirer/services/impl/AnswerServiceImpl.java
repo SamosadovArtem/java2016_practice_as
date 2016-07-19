@@ -6,11 +6,13 @@ import com.inquirer.models.Answer;
 import com.inquirer.models.Question;
 import com.inquirer.services.AnswerService;
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class AnswerServiceImpl implements AnswerService {
 
     private AnswerDao answerDao;

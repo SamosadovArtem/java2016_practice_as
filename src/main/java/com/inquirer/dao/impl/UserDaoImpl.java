@@ -4,11 +4,13 @@ import com.inquirer.dao.UserDao;
 import com.inquirer.models.User;
 import com.inquirer.utils.DaoHelper;
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class UserDaoImpl implements UserDao {
 
     private static final String SELECT_ALL_USER_QUERY = "SELECT * FROM user";

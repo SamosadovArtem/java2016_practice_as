@@ -6,11 +6,13 @@ import com.inquirer.models.Result;
 import com.inquirer.models.User;
 import com.inquirer.utils.DaoHelper;
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+@Repository
 public class ResultDaoImpl implements ResultDao {
 
     private static final String GET_LAST_USER_RESULT_QUERY = "SELECT * FROM result WHERE user = ? " +

@@ -5,10 +5,12 @@ import com.inquirer.dao.impl.UserDaoImpl;
 import com.inquirer.models.User;
 import com.inquirer.services.UserService;
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
 import java.util.List;
 
+@Service
 public class UserServiceImpl implements UserService {
 
     private static final Logger LOGER = Logger.getLogger(UserServiceImpl.class);

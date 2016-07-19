@@ -6,6 +6,7 @@ import com.inquirer.models.Answer;
 import com.inquirer.models.Question;
 import com.inquirer.utils.DaoHelper;
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,6 +14,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class AnswerDaoImpl implements AnswerDao {
 
     private static final String SELECT_ANSWER_FOR_QUESTION_QUERY = "SELECT * FROM answer WHERE question = ?";

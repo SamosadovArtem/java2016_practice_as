@@ -4,11 +4,13 @@ import com.inquirer.dao.QuestionDao;
 import com.inquirer.models.Question;
 import com.inquirer.utils.DaoHelper;
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Repository;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository
 public class QuestionDaoImpl implements QuestionDao {
 
     private static final String SELECT_ALL_QUESTION_QUERY = "SELECT * FROM question";
