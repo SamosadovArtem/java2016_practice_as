@@ -1,6 +1,6 @@
 package com.inquirer.services.impl;
 
-import com.inquirer.dao.AnswerDao;
+import com.inquirer.dao.AnswerRepository;
 import com.inquirer.models.Answer;
 import com.inquirer.models.Question;
 import com.inquirer.services.AnswerService;
@@ -15,7 +15,7 @@ import java.util.List;
 @Service
 public class AnswerServiceImpl implements AnswerService {
 
-    @Autowired private AnswerDao answerDao;
+    @Autowired private AnswerRepository answerRepository;
     private List<Answer> userAnswers;
 
     private static final Logger LOGER = Logger.getLogger(AnswerServiceImpl.class);
@@ -26,12 +26,12 @@ public class AnswerServiceImpl implements AnswerService {
 
     @Override
     public List<Answer> getAnswersForQuestion(Question question) throws SQLException {
-        return answerDao.getAnswersForQuestion(question);
+        return answerRepository.getAnswersForQuestion(question);
     }
 
     @Override
     public Answer getAnswerById(int id) throws SQLException {
-        return answerDao.getAnswerById(id);
+        return answerRepository.getAnswerById(id);
     }
 
     @Override

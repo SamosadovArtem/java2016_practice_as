@@ -1,6 +1,6 @@
 package com.inquirer.dao.impl;
 
-import com.inquirer.dao.ResultDao;
+import com.inquirer.dao.ResultRepository;
 import com.inquirer.exeptions.UserWithoutMarkExeption;
 import com.inquirer.models.Result;
 import com.inquirer.models.User;
@@ -13,12 +13,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 @Repository
-public class ResultRepository implements ResultDao {
+public class ResultRepositoryImpl implements ResultRepository {
 
     private static final String GET_LAST_USER_RESULT_QUERY = "SELECT * FROM result WHERE user = ? " +
             "ORDER BY id DESC LIMIT 1";
     private static final String ADD_RESULT_QUERY = "INSERT INTO RESULT(user, mark) VALUES (?,?)";
-    private static final Logger LOGER = Logger.getLogger(QuestionRepository.class);
+    private static final Logger LOGER = Logger.getLogger(QuestionRepositoryImpl.class);
 
     private DaoHelper daoHelper = new DaoHelper();
 

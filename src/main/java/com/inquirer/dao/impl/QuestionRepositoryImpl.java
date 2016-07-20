@@ -1,6 +1,6 @@
 package com.inquirer.dao.impl;
 
-import com.inquirer.dao.QuestionDao;
+import com.inquirer.dao.QuestionRepository;
 import com.inquirer.models.Question;
 import com.inquirer.utils.DaoHelper;
 import org.apache.log4j.Logger;
@@ -12,12 +12,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class QuestionRepository implements QuestionDao {
+public class QuestionRepositoryImpl implements QuestionRepository {
 
     private static final String SELECT_ALL_QUESTION_QUERY = "SELECT * FROM question";
     private static final String SELECT_QUESTION_BY_NUMBER_QUERY = "SELECT * FROM question WHERE id = ?";
 
-    private static final Logger LOGER = Logger.getLogger(QuestionRepository.class);
+    private static final Logger LOGER = Logger.getLogger(QuestionRepositoryImpl.class);
 
     private DaoHelper daoHelper = new DaoHelper();
 

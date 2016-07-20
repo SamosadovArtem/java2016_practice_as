@@ -6,7 +6,7 @@ import com.inquirer.models.Question;
 import java.sql.SQLException;
 import java.util.List;
 
-public interface AnswerDao {
+public interface AnswerRepository {
 
     List<Answer> getAnswersForQuestion(Question question) throws SQLException;
     Answer getAnswerById(int id) throws SQLException;

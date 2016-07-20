@@ -1,6 +1,6 @@
 package com.inquirer.services.impl;
 
-import com.inquirer.dao.ResultDao;
+import com.inquirer.dao.ResultRepository;
 import com.inquirer.exeptions.UserWithoutMarkExeption;
 import com.inquirer.models.Result;
 import com.inquirer.models.User;
@@ -11,15 +11,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class ResultServiceImpl implements ResultService {
 
-    @Autowired private ResultDao resultDao;
+    @Autowired private ResultRepository resultRepository;
 
     @Override
     public Result getLastUserResult(User user) throws UserWithoutMarkExeption{
-        return resultDao.getLastUserResult(user);
+        return resultRepository.getLastUserResult(user);
     }
 
     @Override
     public void addUserResult(Result result) {
-        resultDao.addUserResult(result);
+        resultRepository.addUserResult(result);
     }
 }

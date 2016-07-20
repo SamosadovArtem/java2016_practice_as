@@ -5,7 +5,7 @@ import com.inquirer.models.User;
 import java.sql.SQLException;
 import java.util.List;
 
-public interface UserDao {
+public interface UserRepository {
 
     void addUser(User user) throws SQLException;
 

@@ -1,7 +1,7 @@
 package com.inquirer.dao.impl;
 
 
-import com.inquirer.dao.AnswerDao;
+import com.inquirer.dao.AnswerRepository;
 import com.inquirer.models.Answer;
 import com.inquirer.models.Question;
 import com.inquirer.utils.DaoHelper;
@@ -15,12 +15,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class AnswerRepository implements AnswerDao {
+public class AnswerRepositoryImpl implements AnswerRepository {
 
     private static final String SELECT_ANSWER_FOR_QUESTION_QUERY = "SELECT * FROM answer WHERE question = ?";
     private static final String SELECT_ANSWER_BY_ID_QUERY = "SELECT * FROM answer WHERE answer.id = ?";
 
-    private static final Logger LOGER = Logger.getLogger(AnswerRepository.class);
+    private static final Logger LOGER = Logger.getLogger(AnswerRepositoryImpl.class);
 
     private DaoHelper daoHelper = new DaoHelper();
 
