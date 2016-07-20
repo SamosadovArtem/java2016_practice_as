@@ -5,6 +5,7 @@ import com.inquirer.dao.impl.QuestionRepository;
 import com.inquirer.models.Question;
 import com.inquirer.services.QuestionService;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
@@ -15,11 +16,7 @@ public class QuestionServiceImpl implements QuestionService {
 
     private static final Logger LOGER = Logger.getLogger(QuestionServiceImpl.class);
 
-    private QuestionDao questionDao;
-
-    public QuestionServiceImpl(){
-        questionDao = new QuestionRepository();
-    }
+    @Autowired private QuestionDao questionDao;
 
     @Override
     public List<Question> getQuestions() throws SQLException {

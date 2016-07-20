@@ -5,6 +5,7 @@ import com.inquirer.dao.impl.UserRepository;
 import com.inquirer.models.User;
 import com.inquirer.services.UserService;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
@@ -15,11 +16,7 @@ public class UserServiceImpl implements UserService {
 
     private static final Logger LOGER = Logger.getLogger(UserServiceImpl.class);
 
-    private UserDao userDao;
-
-    public UserServiceImpl(){
-        userDao = new UserRepository();
-    }
+    @Autowired private UserDao userDao;
 
     @Override
     public List<User> getUsers() throws SQLException {

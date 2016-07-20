@@ -31,7 +31,7 @@ public class TestPageController {
     private static final Logger LOGER = Logger.getLogger(TestPageController.class);
 
     @Autowired private AnswerServiceImpl answerService;
-    private QuestionServiceImpl questionService = new QuestionServiceImpl();
+    @Autowired private QuestionServiceImpl questionService;
 
     @RequestMapping(method = RequestMethod.GET)
     protected String doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
