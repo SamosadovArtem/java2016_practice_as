@@ -23,13 +23,11 @@ import java.io.IOException;
 public class LoginController {
 
     @RequestMapping(method = RequestMethod.GET)
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        TilesContainer container = TilesAccess.getContainer(new ServletApplicationContext(request.getSession().getServletContext()));
-        Request req = new ServletRequest(container.getApplicationContext(), request, response);
-        container.render("inquirer.loginPage", req);
+    protected String doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        return "inquirer.loginPage";
     }
     @RequestMapping(method = RequestMethod.POST)
-    public void doPost(HttpServletRequest request,HttpServletResponse response) throws IOException, ServletException {
+    public String doPost(HttpServletRequest request,HttpServletResponse response) throws IOException, ServletException {
         User user = new User();
         user.setName(request.getParameter("login"));
 
@@ -39,12 +37,10 @@ public class LoginController {
             HttpSession session = request.getSession();
             user = userLoginService.getUserByName(user.getName());
             session.setAttribute("user",user);
-            response.sendRedirect("test?question=1");
+            return "redirect:/test?question=1";
         } else {
             request.setAttribute("status","User not found");
-            TilesContainer container = TilesAccess.getContainer(new ServletApplicationContext(request.getSession().getServletContext()));
-            Request req = new ServletRequest(container.getApplicationContext(), request, response);
-            container.render("inquirer.loginPage", req);
+            return "inquirer.loginPage";
         }
     }
 }

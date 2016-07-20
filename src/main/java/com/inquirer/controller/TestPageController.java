@@ -10,6 +10,7 @@ import org.apache.tiles.access.TilesAccess;
 import org.apache.tiles.request.Request;
 import org.apache.tiles.request.servlet.ServletApplicationContext;
 import org.apache.tiles.request.servlet.ServletRequest;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -29,11 +30,11 @@ public class TestPageController {
 
     private static final Logger LOGER = Logger.getLogger(TestPageController.class);
 
-    private AnswerServiceImpl answerService = new AnswerServiceImpl();
+    @Autowired private AnswerServiceImpl answerService;
     private QuestionServiceImpl questionService = new QuestionServiceImpl();
 
     @RequestMapping(method = RequestMethod.GET)
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    protected String doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         Question currentQuestion = questionService.getQuestionByNumber(Integer.parseInt(request.getParameter("question")));
         String questionTitle = currentQuestion.getTitle();
@@ -57,13 +58,11 @@ public class TestPageController {
         request.setAttribute("questionTitle", questionTitle);
         request.setAttribute("answers", answers);
 
-        TilesContainer container = TilesAccess.getContainer(new ServletApplicationContext(request.getSession().getServletContext()));
-        Request req = new ServletRequest(container.getApplicationContext(), request, response);
-        container.render("inquirer.testPage", req);
+        return "inquirer.testPage";
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public void doPost(HttpServletRequest request,HttpServletResponse response) throws IOException, ServletException {
+    public String doPost(HttpServletRequest request,HttpServletResponse response) throws IOException, ServletException {
 
         HttpSession session = request.getSession();
 
@@ -79,8 +78,7 @@ public class TestPageController {
                 //answerService.clearUserAnswers();
             }
         }
-
-        response.sendRedirect("test?question=" + request.getParameter("questionParameterNumber"));
+        return "redirect:test?question=" + request.getParameter("questionParameterNumber");
     }
 }
 

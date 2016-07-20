@@ -13,9 +13,9 @@ import java.io.IOException;
 @RequestMapping("logout")
 public class LogOutController {
     @RequestMapping(method = RequestMethod.GET)
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    protected String doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         HttpSession session = request.getSession();
         session.invalidate();
-        response.sendRedirect("login");
+        return "redirect:login";
     }
 }

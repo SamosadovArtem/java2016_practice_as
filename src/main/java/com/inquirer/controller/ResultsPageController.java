@@ -25,7 +25,7 @@ import java.io.IOException;
 public class ResultsPageController {
 
     @RequestMapping(method = RequestMethod.GET)
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    protected String doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         User user = (User) request.getSession().getAttribute("user");
         ResultService resultService = new ResultServiceImpl();
 
@@ -48,8 +48,6 @@ public class ResultsPageController {
             request.setAttribute("result", s);
         }
 
-        TilesContainer container = TilesAccess.getContainer(new ServletApplicationContext(request.getSession().getServletContext()));
-        Request req = new ServletRequest(container.getApplicationContext(), request, response);
-        container.render("inquirer.resultsPage", req);
+        return "inquirer.resultsPage";
     }
 }
