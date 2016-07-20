@@ -1,4 +1,4 @@
-package com.inquirer.controller;
+package com.inquirer.filter;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
