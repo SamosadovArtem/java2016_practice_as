@@ -21,8 +21,6 @@ import java.util.List;
 @RequestMapping("test")
 public class TestPageController {
 
-    private static final Logger LOGER = Logger.getLogger(TestPageController.class);
-
     @Autowired private AnswerServiceImpl answerService;
     @Autowired private QuestionServiceImpl questionService;
 
@@ -33,11 +31,7 @@ public class TestPageController {
         String questionTitle = currentQuestion.getTitle();
 
         List<Answer> answers = new ArrayList<>();
-        try {
-            answers = answerService.getAnswersForQuestion(currentQuestion);
-        } catch (SQLException e) {
-            LOGER.error(e);
-        }
+        answers = answerService.getAnswersForQuestion(currentQuestion);
 
         int currentUserAnswerId = answerService.getUserAnswerIdByQuestionNumber(Integer.parseInt(question));
 
@@ -68,7 +62,6 @@ public class TestPageController {
             if (questionService.getQuestionsAmount() == answerService.getUserAnswersAmount()) {
                 session.setAttribute("userResult", answerService.getTestResult());
                 session.setAttribute("userAnswers", answerService);
-                //answerService.clearUserAnswers();
             }
         }
         return "redirect:test?question=" + questionParameterNumber;

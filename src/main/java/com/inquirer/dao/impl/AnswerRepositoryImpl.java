@@ -25,7 +25,7 @@ public class AnswerRepositoryImpl implements AnswerRepository {
     private DaoHelper daoHelper = new DaoHelper();
 
     @Override
-    public List<Answer> getAnswersForQuestion(Question question) throws SQLException {
+    public List<Answer> getAnswersForQuestion(Question question){
         List<Answer> answers =  new ArrayList();
 
         try (PreparedStatement statement = daoHelper.getStatement(SELECT_ANSWER_FOR_QUESTION_QUERY)) {

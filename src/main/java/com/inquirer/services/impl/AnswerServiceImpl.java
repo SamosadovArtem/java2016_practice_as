@@ -25,8 +25,14 @@ public class AnswerServiceImpl implements AnswerService {
     }
 
     @Override
-    public List<Answer> getAnswersForQuestion(Question question) throws SQLException {
-        return answerRepository.getAnswersForQuestion(question);
+    public List<Answer> getAnswersForQuestion(Question question){
+        List<Answer> answers = new ArrayList<Answer>();
+        try {
+            answers = answerRepository.getAnswersForQuestion(question);
+        } catch (SQLException e) {
+            LOGER.error(e);
+        }
+        return answers;
     }
 
     @Override
