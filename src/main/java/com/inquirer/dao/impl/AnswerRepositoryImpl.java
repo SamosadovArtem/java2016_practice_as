@@ -1,18 +1,15 @@
 package com.inquirer.dao.impl;
 
-
 import com.inquirer.dao.AnswerRepository;
+import com.inquirer.mapper.AnswerMapper;
 import com.inquirer.models.Answer;
 import com.inquirer.models.Question;
-import com.inquirer.utils.DaoHelper;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
+
+import org.springframework.jdbc.core.JdbcTemplate;
 
 @Repository
 public class AnswerRepositoryImpl implements AnswerRepository {
@@ -22,51 +19,19 @@ public class AnswerRepositoryImpl implements AnswerRepository {
 
     private static final Logger LOGER = Logger.getLogger(AnswerRepositoryImpl.class);
 
-    private DaoHelper daoHelper = new DaoHelper();
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
     @Override
     public List<Answer> getAnswersForQuestion(Question question){
-        List<Answer> answers =  new ArrayList();
-
-        try (PreparedStatement statement = daoHelper.getStatement(SELECT_ANSWER_FOR_QUESTION_QUERY)) {
-            statement.setInt(1,question.getId());
-            ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                Answer tempAnswer = new Answer();
-                tempAnswer.setId(resultSet.getInt("id"));
-                tempAnswer.setTitle(resultSet.getString("title"));
-                tempAnswer.setQuestion(resultSet.getInt("question"));
-                tempAnswer.setRight(resultSet.getBoolean("isRight"));
-                answers.add(tempAnswer);
-            }
-        } catch (SQLException e){
-            LOGER.error(e);
-        } finally {
-            daoHelper.closeConnection();
-        }
-
+        List<Answer> answers  = jdbcTemplate.query(SELECT_ANSWER_FOR_QUESTION_QUERY,new Object[]{question.getId()},
+                new AnswerMapper());
         return answers;
     }
 
     @Override
-    public Answer getAnswerById(int id) throws SQLException {
-        Answer answer = new Answer();
-
-        try (PreparedStatement statement = daoHelper.getStatement(SELECT_ANSWER_BY_ID_QUERY)) {
-            statement.setInt(1,id);
-            ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                answer = new Answer();
-                answer.setId(resultSet.getInt("id"));
-                answer.setTitle(resultSet.getString("title"));
-                answer.setQuestion(resultSet.getInt("question"));
-                answer.setRight(resultSet.getBoolean("isRight"));
-            }
-        } catch (SQLException e) {
-            LOGER.error(e);
-        } finally {
-            daoHelper.closeConnection();
-        }
+    public Answer getAnswerById(int id){
+        Answer answer = jdbcTemplate.queryForObject(SELECT_ANSWER_BY_ID_QUERY,new Object[]{id},new AnswerMapper());
         return answer;
     }
 }

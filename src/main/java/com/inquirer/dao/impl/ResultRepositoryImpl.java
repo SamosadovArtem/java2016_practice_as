@@ -2,15 +2,15 @@ package com.inquirer.dao.impl;
 
 import com.inquirer.dao.ResultRepository;
 import com.inquirer.exeptions.UserWithoutMarkExeption;
+import com.inquirer.mapper.ResultMapper;
 import com.inquirer.models.Result;
 import com.inquirer.models.User;
-import com.inquirer.utils.DaoHelper;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.util.List;
 
 @Repository
 public class ResultRepositoryImpl implements ResultRepository {
@@ -20,45 +20,23 @@ public class ResultRepositoryImpl implements ResultRepository {
     private static final String ADD_RESULT_QUERY = "INSERT INTO RESULT(user, mark) VALUES (?,?)";
     private static final Logger LOGER = Logger.getLogger(QuestionRepositoryImpl.class);
 
-    private DaoHelper daoHelper = new DaoHelper();
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
     @Override
     public Result getLastUserResult(User user) throws UserWithoutMarkExeption{
-        Result result = null;
+        List<Result> results = results = jdbcTemplate.query(GET_LAST_USER_RESULT_QUERY, new Object[]{user.getId()},
+                new ResultMapper());
 
-        try (PreparedStatement statement = daoHelper.getStatement(GET_LAST_USER_RESULT_QUERY)) {
-            statement.setInt(1, user.getId());
-            ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                result = new Result();
-                result.setId(resultSet.getInt("id"));
-                result.setUser(resultSet.getInt("user"));
-                result.setMark(resultSet.getInt("mark"));
-            }
-        } catch (SQLException e) {
-            LOGER.error(e);
-        }
-        finally {
-            daoHelper.closeConnection();
-        }
-
-        if (result==null){
+        if (results.isEmpty()){
             throw new UserWithoutMarkExeption("User have no marks");
         }
 
-        return result;
+        return results.get(0);
     }
 
     @Override
     public void addUserResult(Result result) {
-        try (PreparedStatement statement = daoHelper.getStatement(ADD_RESULT_QUERY)) {
-            statement.setInt(1,result.getUser());
-            statement.setInt(2,result.getMark());
-            statement.execute();
-        } catch (SQLException e){
-            LOGER.error(e);
-        } finally {
-            daoHelper.closeConnection();
-        }
+        jdbcTemplate.update(ADD_RESULT_QUERY, result.getUser(), result.getMark());
     }
 }

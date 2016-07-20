@@ -1,14 +1,12 @@
 package com.inquirer.dao.impl;
 
 import com.inquirer.dao.QuestionRepository;
+import com.inquirer.mapper.QuestionMapper;
 import com.inquirer.models.Question;
-import com.inquirer.utils.DaoHelper;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -19,48 +17,18 @@ public class QuestionRepositoryImpl implements QuestionRepository {
 
     private static final Logger LOGER = Logger.getLogger(QuestionRepositoryImpl.class);
 
-    private DaoHelper daoHelper = new DaoHelper();
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
 
-
-    public List<Question> getQuestions() throws SQLException {
-        List<Question> questions = new ArrayList();
-
-        try (PreparedStatement statement = daoHelper.getStatement(SELECT_ALL_QUESTION_QUERY);
-             ResultSet resultSet = statement.executeQuery()) {
-
-            while (resultSet.next()) {
-                Question tempQuestion = new Question();
-                tempQuestion.setId(resultSet.getInt("id"));
-                tempQuestion.setTitle(resultSet.getString("title"));
-                questions.add(tempQuestion);
-            }
-        } catch (SQLException e){
-            LOGER.error(e);
-        } finally {
-            daoHelper.closeConnection();
-        }
-
+    public List<Question> getQuestions(){
+        List<Question> questions = jdbcTemplate.query(SELECT_ALL_QUESTION_QUERY,new QuestionMapper());
         return questions;
     }
 
     @Override
-    public Question getQuestionByNumber(int number) throws SQLException {
-        Question question = new Question();
-
-        try (PreparedStatement statement = daoHelper.getStatement(SELECT_QUESTION_BY_NUMBER_QUERY)) {
-            statement.setInt(1, number);
-            ResultSet resultSet = statement.executeQuery();
-            while (resultSet.next()) {
-                question = new Question();
-                question.setId(resultSet.getInt("id"));
-                question.setTitle(resultSet.getString("title"));
-            }
-        } catch (SQLException e){
-            LOGER.error(e);
-        } finally {
-            daoHelper.closeConnection();
-        }
-
+    public Question getQuestionByNumber(int number){
+        Question question = jdbcTemplate.queryForObject(SELECT_QUESTION_BY_NUMBER_QUERY, new Object[]{number},
+                new QuestionMapper());
         return question;
     }
 
