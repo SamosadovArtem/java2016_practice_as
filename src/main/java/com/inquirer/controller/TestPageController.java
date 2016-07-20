@@ -29,7 +29,7 @@ public class TestPageController {
     @Autowired private QuestionServiceImpl questionService;
 
     @RequestMapping(method = RequestMethod.GET)
-    protected String doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    protected String getQuestion(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
         Question currentQuestion = questionService.getQuestionByNumber(Integer.parseInt(request.getParameter("question")));
         String questionTitle = currentQuestion.getTitle();
@@ -57,7 +57,7 @@ public class TestPageController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public String doPost(HttpServletRequest request,HttpServletResponse response) throws IOException, ServletException {
+    public String acceptQuestion(HttpServletRequest request,HttpServletResponse response) throws IOException, ServletException {
 
         HttpSession session = request.getSession();
 

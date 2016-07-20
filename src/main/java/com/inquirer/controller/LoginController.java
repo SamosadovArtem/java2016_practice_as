@@ -26,11 +26,11 @@ public class LoginController {
     @Autowired private UserService userLoginService;
 
     @RequestMapping(method = RequestMethod.GET)
-    protected String doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    protected String login(HttpServletRequest request, HttpServletResponse response) throws IOException {
         return "inquirer.loginPage";
     }
     @RequestMapping(method = RequestMethod.POST)
-    public String doPost(HttpServletRequest request,HttpServletResponse response) throws IOException, ServletException {
+    public String acceptUser(HttpServletRequest request,HttpServletResponse response) throws IOException, ServletException {
         User user = new User();
 
         user.setName(request.getParameter("login"));

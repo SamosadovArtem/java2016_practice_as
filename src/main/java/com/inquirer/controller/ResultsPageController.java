@@ -21,7 +21,7 @@ public class ResultsPageController {
 
     @Autowired private ResultService resultService;
     @RequestMapping(method = RequestMethod.GET)
-    protected String doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    protected String watchResult(HttpServletRequest request, HttpServletResponse response) throws IOException {
         User user = (User) request.getSession().getAttribute("user");
 
         HttpSession session = request.getSession();
