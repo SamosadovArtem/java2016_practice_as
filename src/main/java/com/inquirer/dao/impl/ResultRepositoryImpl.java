@@ -1,22 +1,24 @@
 package com.inquirer.dao.impl;
 
-import com.inquirer.dao.ResultDao;
+import com.inquirer.dao.ResultRepository;
 import com.inquirer.exeptions.UserWithoutMarkExeption;
 import com.inquirer.models.Result;
 import com.inquirer.models.User;
 import com.inquirer.utils.DaoHelper;
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class ResultDaoImpl implements ResultDao {
+@Repository
+public class ResultRepositoryImpl implements ResultRepository {
 
     private static final String GET_LAST_USER_RESULT_QUERY = "SELECT * FROM result WHERE user = ? " +
             "ORDER BY id DESC LIMIT 1";
     private static final String ADD_RESULT_QUERY = "INSERT INTO RESULT(user, mark) VALUES (?,?)";
-    private static final Logger LOGER = Logger.getLogger(QuestionDaoImpl.class);
+    private static final Logger LOGER = Logger.getLogger(QuestionRepositoryImpl.class);
 
     private DaoHelper daoHelper = new DaoHelper();
 

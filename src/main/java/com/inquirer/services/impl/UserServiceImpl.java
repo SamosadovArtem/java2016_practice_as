@@ -1,38 +1,36 @@
 package com.inquirer.services.impl;
 
-import com.inquirer.dao.UserDao;
-import com.inquirer.dao.impl.UserDaoImpl;
+import com.inquirer.dao.UserRepository;
 import com.inquirer.models.User;
 import com.inquirer.services.UserService;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
 import java.util.List;
 
+@Service
 public class UserServiceImpl implements UserService {
 
     private static final Logger LOGER = Logger.getLogger(UserServiceImpl.class);
 
-    private UserDao userDao;
-
-    public UserServiceImpl(){
-        userDao = new UserDaoImpl();
-    }
+    @Autowired private UserRepository userRepository;
 
     @Override
     public List<User> getUsers() throws SQLException {
-        return userDao.getUsers();
+        return userRepository.getUsers();
     }
 
     @Override
     public void addUser(User user) throws SQLException {
-        userDao.addUser(user);
+        userRepository.addUser(user);
     }
 
     @Override
     public User getUserByName(String name) {
         try {
-            return userDao.getUserByName(name);
+            return userRepository.getUserByName(name);
         } catch (SQLException e) {
             LOGER.error(e);
         }
@@ -43,7 +41,7 @@ public class UserServiceImpl implements UserService {
         User tempUser = null;
 
         try {
-            tempUser = userDao.getUserByName(user.getName());
+            tempUser = userRepository.getUserByName(user.getName());
         } catch (SQLException e) {
             LOGER.error(e);
         }

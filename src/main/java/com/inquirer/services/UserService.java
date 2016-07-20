@@ -12,4 +12,6 @@ public interface UserService {
     void addUser (User user) throws SQLException;
 
     User getUserByName(String name);
+
+    public boolean isUserExist(User user);
 }

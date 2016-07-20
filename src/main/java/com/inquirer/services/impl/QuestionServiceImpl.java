@@ -1,34 +1,32 @@
 package com.inquirer.services.impl;
 
-import com.inquirer.dao.QuestionDao;
-import com.inquirer.dao.impl.QuestionDaoImpl;
+import com.inquirer.dao.QuestionRepository;
 import com.inquirer.models.Question;
 import com.inquirer.services.QuestionService;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
 import java.util.List;
 
+@Service
 public class QuestionServiceImpl implements QuestionService {
 
     private static final Logger LOGER = Logger.getLogger(QuestionServiceImpl.class);
 
-    private QuestionDao questionDao;
-
-    public QuestionServiceImpl(){
-        questionDao = new QuestionDaoImpl();
-    }
+    @Autowired private QuestionRepository questionRepository;
 
     @Override
     public List<Question> getQuestions() throws SQLException {
-        return questionDao.getQuestions();
+        return questionRepository.getQuestions();
     }
 
     @Override
     public Question getQuestionByNumber(int number) {
         Question question = null;
         try {
-            question = questionDao.getQuestionByNumber(number);
+            question = questionRepository.getQuestionByNumber(number);
         } catch (SQLException e) {
             LOGER.error(e);
         }

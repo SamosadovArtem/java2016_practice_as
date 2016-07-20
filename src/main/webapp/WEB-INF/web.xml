@@ -5,49 +5,40 @@
          version="3.1">
 
     <display-name>inquirer</display-name>
+
+    <!--
     <listener>
         <listener-class>org.apache.tiles.web.startup.simple.SimpleTilesListener</listener-class>
     </listener>
+    -->
+
+    <!-- Spring -->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>/WEB-INF/classes/applicationContext.xml</param-value>
+    </context-param>
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
     <servlet>
-        <servlet-name>HelloServlet</servlet-name>
-        <servlet-class>com.inquirer.servlets.TestPageServlet</servlet-class>
+        <servlet-name>dispatcher</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
-        <servlet-name>HelloServlet</servlet-name>
-        <url-pattern>/test</url-pattern>
+        <servlet-name>dispatcher</servlet-name>
+        <url-pattern>/</url-pattern>
     </servlet-mapping>
+    <session-config>
+        <session-timeout>
+            30
+        </session-timeout>
+    </session-config>
+    <!-- Spring -->
 
-    <servlet>
-        <servlet-name>LoginPageServlet</servlet-name>
-        <servlet-class>com.inquirer.servlets.LoginPageServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>LoginPageServlet</servlet-name>
-        <url-pattern>/login</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>LogoutPageServlet</servlet-name>
-        <servlet-class>com.inquirer.servlets.LogOutServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>LogoutPageServlet</servlet-name>
-        <url-pattern>/logout</url-pattern>
-    </servlet-mapping>
-
-    <servlet>
-        <servlet-name>ResultsPageServlet</servlet-name>
-        <servlet-class>com.inquirer.servlets.ResultsPageServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>ResultsPageServlet</servlet-name>
-        <url-pattern>/results</url-pattern>
-    </servlet-mapping>
-
-
-    <filter>
+       <filter>
         <filter-name>AuthenticationFilter</filter-name>
-        <filter-class>com.inquirer.servlets.AuthFilter</filter-class>
+        <filter-class>com.inquirer.filter.AuthFilter</filter-class>
     </filter>
 
     <filter-mapping>

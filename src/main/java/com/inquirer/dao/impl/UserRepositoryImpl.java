@@ -1,21 +1,25 @@
 package com.inquirer.dao.impl;
 
-import com.inquirer.dao.UserDao;
+import com.inquirer.dao.UserRepository;
 import com.inquirer.models.User;
 import com.inquirer.utils.DaoHelper;
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Repository;
 
-import java.sql.*;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UserDaoImpl implements UserDao {
+@Repository
+public class UserRepositoryImpl implements UserRepository {
 
     private static final String SELECT_ALL_USER_QUERY = "SELECT * FROM user";
     private static final String ADD_USER_QUERY = "INSERT INTO user(name,age) VALUES (?,?)";
     private static final String GET_USER_BY_NAME_QUERY = "SELECT * FROM user WHERE name = ?";
 
-    private static final Logger LOGER = Logger.getLogger(QuestionDaoImpl.class);
+    private static final Logger LOGER = Logger.getLogger(QuestionRepositoryImpl.class);
 
     private DaoHelper daoHelper = new DaoHelper();
 

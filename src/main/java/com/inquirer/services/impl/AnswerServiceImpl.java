@@ -1,36 +1,43 @@
 package com.inquirer.services.impl;
 
-import com.inquirer.dao.AnswerDao;
-import com.inquirer.dao.impl.AnswerDaoImpl;
+import com.inquirer.dao.AnswerRepository;
 import com.inquirer.models.Answer;
 import com.inquirer.models.Question;
 import com.inquirer.services.AnswerService;
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class AnswerServiceImpl implements AnswerService {
 
-    private AnswerDao answerDao;
+    @Autowired private AnswerRepository answerRepository;
     private List<Answer> userAnswers;
 
     private static final Logger LOGER = Logger.getLogger(AnswerServiceImpl.class);
 
     public AnswerServiceImpl(){
-        answerDao = new AnswerDaoImpl();
         userAnswers = new ArrayList<>();
     }
 
     @Override
-    public List<Answer> getAnswersForQuestion(Question question) throws SQLException {
-        return answerDao.getAnswersForQuestion(question);
+    public List<Answer> getAnswersForQuestion(Question question){
+        List<Answer> answers = new ArrayList<Answer>();
+        try {
+            answers = answerRepository.getAnswersForQuestion(question);
+        } catch (SQLException e) {
+            LOGER.error(e);
+        }
+        return answers;
     }
 
     @Override
     public Answer getAnswerById(int id) throws SQLException {
-        return answerDao.getAnswerById(id);
+        return answerRepository.getAnswerById(id);
     }
 
     @Override
