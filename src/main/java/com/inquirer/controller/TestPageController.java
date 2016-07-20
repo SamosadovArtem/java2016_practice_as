@@ -11,11 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +27,7 @@ public class TestPageController {
     @Autowired private QuestionServiceImpl questionService;
 
     @RequestMapping(method = RequestMethod.GET)
-    protected String getQuestion(HttpServletRequest request, Model model) throws IOException {
+    protected String getQuestion(HttpServletRequest request, Model model){
 
         Question currentQuestion = questionService.getQuestionByNumber(Integer.parseInt(request.getParameter("question")));
         String questionTitle = currentQuestion.getTitle();
@@ -58,7 +55,7 @@ public class TestPageController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public String acceptQuestion(HttpServletRequest request, HttpSession session) throws IOException, ServletException {
+    public String acceptQuestion(HttpServletRequest request, HttpSession session){
 
         if (request.getParameter("userAnswerInput")!=null) {
             int id = Integer.parseInt(request.getParameter("userAnswerInput"));

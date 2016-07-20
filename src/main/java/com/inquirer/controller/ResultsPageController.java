@@ -5,7 +5,6 @@ import com.inquirer.models.Result;
 import com.inquirer.models.User;
 import com.inquirer.services.AnswerService;
 import com.inquirer.services.ResultService;
-import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,9 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 
 @Controller
 @RequestMapping("results")
@@ -23,7 +21,7 @@ public class ResultsPageController {
 
     @Autowired private ResultService resultService;
     @RequestMapping(method = RequestMethod.GET)
-    protected String watchResult(HttpServletRequest request,HttpSession session, Model model) throws IOException {
+    protected String watchResult(HttpServletRequest request,HttpSession session, Model model) throws UnsupportedEncodingException {
         User user = (User) request.getSession().getAttribute("user");
 
         if (session.getAttribute("userResult")!=null){
@@ -36,12 +34,11 @@ public class ResultsPageController {
         }
 
         try {
+
             int result = resultService.getLastUserResult(user).getMark();
             model.addAttribute("result", result);
         } catch (UserWithoutMarkExeption ex) {
-            String message = "Вы не прошли ни одного теста";
-            String s = new String(message.getBytes(), "UTF-8");
-            model.addAttribute("result", s);
+            model.addAttribute("result", new String("Вы не прошли ни одного теста".getBytes(),"UTF-8"));
         }
 
         return "inquirer.resultsPage";
