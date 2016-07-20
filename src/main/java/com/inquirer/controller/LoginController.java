@@ -11,6 +11,7 @@ import org.apache.tiles.request.servlet.ServletApplicationContext;
 import org.apache.tiles.request.servlet.ServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -30,7 +31,7 @@ public class LoginController {
         return "inquirer.loginPage";
     }
     @RequestMapping(method = RequestMethod.POST)
-    public String acceptUser(HttpServletRequest request, HttpSession session) throws IOException, ServletException {
+    public String acceptUser(HttpServletRequest request, HttpSession session, Model model) throws IOException, ServletException {
         User user = new User();
 
         user.setName(request.getParameter("login"));
@@ -40,7 +41,7 @@ public class LoginController {
             session.setAttribute("user",user);
             return "redirect:/test?question=1";
         } else {
-            request.setAttribute("status","User not found");
+            model.addAttribute("status","User not found");
             return "inquirer.loginPage";
         }
     }

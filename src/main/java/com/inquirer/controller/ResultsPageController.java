@@ -8,6 +8,7 @@ import com.inquirer.services.ResultService;
 import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -22,7 +23,7 @@ public class ResultsPageController {
 
     @Autowired private ResultService resultService;
     @RequestMapping(method = RequestMethod.GET)
-    protected String watchResult(HttpServletRequest request,HttpSession session) throws IOException {
+    protected String watchResult(HttpServletRequest request,HttpSession session, Model model) throws IOException {
         User user = (User) request.getSession().getAttribute("user");
 
         if (session.getAttribute("userResult")!=null){
@@ -36,11 +37,11 @@ public class ResultsPageController {
 
         try {
             int result = resultService.getLastUserResult(user).getMark();
-            request.setAttribute("result", result);
+            model.addAttribute("result", result);
         } catch (UserWithoutMarkExeption ex) {
             String message = "Вы не прошли ни одного теста";
             String s = new String(message.getBytes(), "UTF-8");
-            request.setAttribute("result", s);
+            model.addAttribute("result", s);
         }
 
         return "inquirer.resultsPage";

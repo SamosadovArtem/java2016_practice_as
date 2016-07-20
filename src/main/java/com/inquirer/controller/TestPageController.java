@@ -7,6 +7,7 @@ import com.inquirer.services.impl.QuestionServiceImpl;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -29,7 +30,7 @@ public class TestPageController {
     @Autowired private QuestionServiceImpl questionService;
 
     @RequestMapping(method = RequestMethod.GET)
-    protected String getQuestion(HttpServletRequest request) throws IOException {
+    protected String getQuestion(HttpServletRequest request, Model model) throws IOException {
 
         Question currentQuestion = questionService.getQuestionByNumber(Integer.parseInt(request.getParameter("question")));
         String questionTitle = currentQuestion.getTitle();
@@ -43,15 +44,15 @@ public class TestPageController {
 
         int currentUserAnswerId = answerService.getUserAnswerIdByQuestionNumber(Integer.parseInt(request.getParameter("question")));
 
-        request.setAttribute("userAnswersAmount", answerService.getUserAnswersAmount());
-        request.setAttribute("currentUserAnswerId", currentUserAnswerId);
-        request.setAttribute("questionsAmount", questionService.getQuestionsAmount());
-        request.setAttribute("questionNubmer", request.getParameter("question"));
-        request.setAttribute("questionParameterNumber", request.getParameter("question"));
-        request.setAttribute("nextQuestionNumber", Integer.parseInt(request.getParameter("question").toString())+1);
-        request.setAttribute("previousQuestionNumber", Integer.parseInt(request.getParameter("question").toString())-1);
-        request.setAttribute("questionTitle", questionTitle);
-        request.setAttribute("answers", answers);
+        model.addAttribute("userAnswersAmount", answerService.getUserAnswersAmount());
+        model.addAttribute("currentUserAnswerId", currentUserAnswerId);
+        model.addAttribute("questionsAmount", questionService.getQuestionsAmount());
+        model.addAttribute("questionNubmer", request.getParameter("question"));
+        model.addAttribute("questionParameterNumber", request.getParameter("question"));
+        model.addAttribute("nextQuestionNumber", Integer.parseInt(request.getParameter("question").toString())+1);
+        model.addAttribute("previousQuestionNumber", Integer.parseInt(request.getParameter("question").toString())-1);
+        model.addAttribute("questionTitle", questionTitle);
+        model.addAttribute("answers", answers);
 
         return "inquirer.testPage";
     }
