@@ -26,16 +26,14 @@ public class LoginController {
     @Autowired private UserService userLoginService;
 
     @RequestMapping(method = RequestMethod.GET)
-    protected String login(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    protected String login() throws IOException {
         return "inquirer.loginPage";
     }
     @RequestMapping(method = RequestMethod.POST)
-    public String acceptUser(HttpServletRequest request,HttpServletResponse response) throws IOException, ServletException {
+    public String acceptUser(HttpServletRequest request) throws IOException, ServletException {
         User user = new User();
 
         user.setName(request.getParameter("login"));
-
-        //UserServiceImpl userLoginService = new UserServiceImpl();
 
         if(userLoginService.isUserExist(user)) {
             HttpSession session = request.getSession();
