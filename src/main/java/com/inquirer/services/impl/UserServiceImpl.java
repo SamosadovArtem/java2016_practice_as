@@ -1,7 +1,6 @@
 package com.inquirer.services.impl;
 
 import com.inquirer.dao.UserDao;
-import com.inquirer.dao.impl.UserRepository;
 import com.inquirer.models.User;
 import com.inquirer.services.UserService;
 import org.apache.log4j.Logger;

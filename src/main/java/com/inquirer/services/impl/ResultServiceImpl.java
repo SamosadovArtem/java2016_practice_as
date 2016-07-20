@@ -1,7 +1,6 @@
 package com.inquirer.services.impl;
 
 import com.inquirer.dao.ResultDao;
-import com.inquirer.dao.impl.ResultRepository;
 import com.inquirer.exeptions.UserWithoutMarkExeption;
 import com.inquirer.models.Result;
 import com.inquirer.models.User;

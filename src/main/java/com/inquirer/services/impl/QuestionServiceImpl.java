@@ -1,7 +1,6 @@
 package com.inquirer.services.impl;
 
 import com.inquirer.dao.QuestionDao;
-import com.inquirer.dao.impl.QuestionRepository;
 import com.inquirer.models.Question;
 import com.inquirer.services.QuestionService;
 import org.apache.log4j.Logger;

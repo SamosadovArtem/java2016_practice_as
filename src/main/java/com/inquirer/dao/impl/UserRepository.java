@@ -6,7 +6,9 @@ import com.inquirer.utils.DaoHelper;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Repository;
 
-import java.sql.*;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 

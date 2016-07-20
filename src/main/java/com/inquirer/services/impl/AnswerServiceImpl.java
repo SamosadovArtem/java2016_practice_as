@@ -1,7 +1,6 @@
 package com.inquirer.services.impl;
 
 import com.inquirer.dao.AnswerDao;
-import com.inquirer.dao.impl.AnswerRepository;
 import com.inquirer.models.Answer;
 import com.inquirer.models.Question;
 import com.inquirer.services.AnswerService;
