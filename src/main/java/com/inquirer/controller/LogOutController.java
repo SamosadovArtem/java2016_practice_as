@@ -13,8 +13,7 @@ import java.io.IOException;
 @RequestMapping("logout")
 public class LogOutController {
     @RequestMapping(method = RequestMethod.GET)
-    protected String logout(HttpServletRequest request) throws IOException {
-        HttpSession session = request.getSession();
+    protected String logout(HttpSession session) throws IOException {
         session.invalidate();
         return "redirect:login";
     }

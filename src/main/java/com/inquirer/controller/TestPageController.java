@@ -57,9 +57,7 @@ public class TestPageController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public String acceptQuestion(HttpServletRequest request) throws IOException, ServletException {
-
-        HttpSession session = request.getSession();
+    public String acceptQuestion(HttpServletRequest request, HttpSession session) throws IOException, ServletException {
 
         if (request.getParameter("userAnswerInput")!=null) {
             int id = Integer.parseInt(request.getParameter("userAnswerInput"));

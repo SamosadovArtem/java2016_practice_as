@@ -30,13 +30,12 @@ public class LoginController {
         return "inquirer.loginPage";
     }
     @RequestMapping(method = RequestMethod.POST)
-    public String acceptUser(HttpServletRequest request) throws IOException, ServletException {
+    public String acceptUser(HttpServletRequest request, HttpSession session) throws IOException, ServletException {
         User user = new User();
 
         user.setName(request.getParameter("login"));
 
         if(userLoginService.isUserExist(user)) {
-            HttpSession session = request.getSession();
             user = userLoginService.getUserByName(user.getName());
             session.setAttribute("user",user);
             return "redirect:/test?question=1";

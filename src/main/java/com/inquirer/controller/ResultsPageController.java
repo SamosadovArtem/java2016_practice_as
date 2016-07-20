@@ -5,6 +5,7 @@ import com.inquirer.models.Result;
 import com.inquirer.models.User;
 import com.inquirer.services.AnswerService;
 import com.inquirer.services.ResultService;
+import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,10 +22,9 @@ public class ResultsPageController {
 
     @Autowired private ResultService resultService;
     @RequestMapping(method = RequestMethod.GET)
-    protected String watchResult(HttpServletRequest request) throws IOException {
+    protected String watchResult(HttpServletRequest request,HttpSession session) throws IOException {
         User user = (User) request.getSession().getAttribute("user");
 
-        HttpSession session = request.getSession();
         if (session.getAttribute("userResult")!=null){
             Result result = new Result();
             result.setUser(user.getId());
