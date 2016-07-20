@@ -11,7 +11,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.UnsupportedEncodingException;
 
@@ -21,8 +20,8 @@ public class ResultsPageController {
 
     @Autowired private ResultService resultService;
     @RequestMapping(method = RequestMethod.GET)
-    protected String watchResult(HttpServletRequest request,HttpSession session, Model model) throws UnsupportedEncodingException {
-        User user = (User) request.getSession().getAttribute("user");
+    protected String watchResult(HttpSession session, Model model) throws UnsupportedEncodingException {
+        User user = (User) session.getAttribute("user");
 
         if (session.getAttribute("userResult")!=null){
             Result result = new Result();

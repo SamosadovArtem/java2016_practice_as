@@ -10,8 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -27,9 +27,9 @@ public class TestPageController {
     @Autowired private QuestionServiceImpl questionService;
 
     @RequestMapping(method = RequestMethod.GET)
-    protected String getQuestion(HttpServletRequest request, Model model){
+    protected String getQuestion(@RequestParam("question") String question, Model model){
 
-        Question currentQuestion = questionService.getQuestionByNumber(Integer.parseInt(request.getParameter("question")));
+        Question currentQuestion = questionService.getQuestionByNumber(Integer.parseInt(question));
         String questionTitle = currentQuestion.getTitle();
 
         List<Answer> answers = new ArrayList<>();
@@ -39,15 +39,15 @@ public class TestPageController {
             LOGER.error(e);
         }
 
-        int currentUserAnswerId = answerService.getUserAnswerIdByQuestionNumber(Integer.parseInt(request.getParameter("question")));
+        int currentUserAnswerId = answerService.getUserAnswerIdByQuestionNumber(Integer.parseInt(question));
 
         model.addAttribute("userAnswersAmount", answerService.getUserAnswersAmount());
         model.addAttribute("currentUserAnswerId", currentUserAnswerId);
         model.addAttribute("questionsAmount", questionService.getQuestionsAmount());
-        model.addAttribute("questionNubmer", request.getParameter("question"));
-        model.addAttribute("questionParameterNumber", request.getParameter("question"));
-        model.addAttribute("nextQuestionNumber", Integer.parseInt(request.getParameter("question").toString())+1);
-        model.addAttribute("previousQuestionNumber", Integer.parseInt(request.getParameter("question").toString())-1);
+        model.addAttribute("questionNubmer", question);
+        model.addAttribute("questionParameterNumber", question);
+        model.addAttribute("nextQuestionNumber", Integer.parseInt(question.toString())+1);
+        model.addAttribute("previousQuestionNumber", Integer.parseInt(question.toString())-1);
         model.addAttribute("questionTitle", questionTitle);
         model.addAttribute("answers", answers);
 
@@ -55,10 +55,12 @@ public class TestPageController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public String acceptQuestion(HttpServletRequest request, HttpSession session){
+    public String acceptQuestion(@RequestParam("userAnswerInput") String userAnswerInput,
+                                 @RequestParam("questionParameterNumber") String questionParameterNumber,
+                                 HttpSession session){
 
-        if (request.getParameter("userAnswerInput")!=null) {
-            int id = Integer.parseInt(request.getParameter("userAnswerInput"));
+        if (userAnswerInput!=null) {
+            int id = Integer.parseInt(userAnswerInput);
 
 
             answerService.setUserAnswer(id);
@@ -69,7 +71,7 @@ public class TestPageController {
                 //answerService.clearUserAnswers();
             }
         }
-        return "redirect:test?question=" + request.getParameter("questionParameterNumber");
+        return "redirect:test?question=" + questionParameterNumber;
     }
 }
 

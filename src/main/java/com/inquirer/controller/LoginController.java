@@ -8,8 +8,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 @Controller
@@ -22,10 +22,10 @@ public class LoginController {
         return "inquirer.loginPage";
     }
     @RequestMapping(method = RequestMethod.POST)
-    public String acceptUser(HttpServletRequest request, HttpSession session, Model model) {
+    public String acceptUser(@RequestParam("login") String login,HttpSession session, Model model) {
         User user = new User();
 
-        user.setName(request.getParameter("login"));
+        user.setName(login);
 
         if(userLoginService.isUserExist(user)) {
             user = userLoginService.getUserByName(user.getName());
