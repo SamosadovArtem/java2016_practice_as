@@ -1,9 +1,19 @@
 package com.inquirer.models;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name="result")
 public class Result {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Column(name = "user")
     private int user;
+
+    @Column(name = "mark")
     private int mark;
 
     public int getId() {
