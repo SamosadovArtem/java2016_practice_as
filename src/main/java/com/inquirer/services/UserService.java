@@ -9,9 +9,10 @@ public interface UserService {
 
     List<User> getUsers() throws SQLException;
 
-    void addUser (User user) throws SQLException;
+    void addUser (User user)throws SQLException;
 
     User getUserByName(String name);
 
-    public boolean isUserExist(User user);
+    boolean isUserExist(User user);
+
 }
