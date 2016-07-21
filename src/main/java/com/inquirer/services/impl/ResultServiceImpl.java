@@ -8,18 +8,27 @@ import com.inquirer.services.ResultService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+import java.util.List;
+
 @Service
 public class ResultServiceImpl implements ResultService {
 
-    @Autowired private ResultRepository resultRepository;
+    @Resource
+    private ResultRepository resultRepository;
 
     @Override
     public Result getLastUserResult(User user) throws UserWithoutMarkExeption{
-        return resultRepository.getLastUserResult(user);
+
+        List<Result> results = resultRepository.getLastUserResult(user.getId());
+        if (results.isEmpty()){
+            throw new UserWithoutMarkExeption("User have no marks");
+        }
+        return results.get(0);
     }
 
     @Override
     public void addUserResult(Result result) {
-        resultRepository.addUserResult(result);
+        resultRepository.save(result);
     }
 }
