@@ -1,9 +1,22 @@
 package com.inquirer.models;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name="answer")
 public class Answer {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Column(name = "title")
     private String title;
+
+    @Column(name = "question")
     private int question;
+
+    @Column(name = "isRight")
     private boolean isRight;
 
     public int getId() {

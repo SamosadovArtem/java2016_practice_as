@@ -1,15 +1,12 @@
 package com.inquirer.dao;
 
 import com.inquirer.models.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 
-import java.sql.SQLException;
-import java.util.List;
+public interface UserRepository extends JpaRepository<User,Integer> {
 
-public interface UserRepository {
+    @Query(value = "SELECT * FROM USER WHERE NAME = ?1", nativeQuery = true)
 
-    void addUser(User user) throws SQLException;
-
-    List<User> getUsers() throws SQLException;
-
-    User getUserByName(String name) throws  SQLException;
+    User getUserByName(String name);
 }

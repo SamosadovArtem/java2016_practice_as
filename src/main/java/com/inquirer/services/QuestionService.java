@@ -8,6 +8,8 @@ import java.util.List;
 public interface QuestionService {
 
     List<Question> getQuestions() throws SQLException;
+
     Question getQuestionByNumber(int number) throws SQLException;
+
     int getQuestionsAmount();
 }

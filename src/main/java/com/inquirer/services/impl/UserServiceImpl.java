@@ -4,9 +4,10 @@ import com.inquirer.dao.UserRepository;
 import com.inquirer.models.User;
 import com.inquirer.services.UserService;
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import javax.annotation.Resource;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -15,37 +16,27 @@ public class UserServiceImpl implements UserService {
 
     private static final Logger LOGER = Logger.getLogger(UserServiceImpl.class);
 
-    @Autowired private UserRepository userRepository;
+    @Resource
+    private UserRepository userRepository;
 
     @Override
+    @Transactional
     public List<User> getUsers() throws SQLException {
-        return userRepository.getUsers();
+        return userRepository.findAll();
     }
 
     @Override
     public void addUser(User user) throws SQLException {
-        userRepository.addUser(user);
+        userRepository.save(user);
     }
 
     @Override
     public User getUserByName(String name) {
-        try {
-            return userRepository.getUserByName(name);
-        } catch (SQLException e) {
-            LOGER.error(e);
-        }
-        return null;
+        return userRepository.getUserByName(name);
     }
 
     public boolean isUserExist(User user)  {
-        User tempUser = null;
-
-        try {
-            tempUser = userRepository.getUserByName(user.getName());
-        } catch (SQLException e) {
-            LOGER.error(e);
-        }
+        User tempUser = userRepository.getUserByName(user.getName());
         return tempUser != null;
     }
-
 }

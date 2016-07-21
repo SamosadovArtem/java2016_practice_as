@@ -5,9 +5,9 @@ import com.inquirer.models.Answer;
 import com.inquirer.models.Question;
 import com.inquirer.services.AnswerService;
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +15,8 @@ import java.util.List;
 @Service
 public class AnswerServiceImpl implements AnswerService {
 
-    @Autowired private AnswerRepository answerRepository;
+    @Resource
+    private AnswerRepository answerRepository;
     private List<Answer> userAnswers;
 
     private static final Logger LOGER = Logger.getLogger(AnswerServiceImpl.class);
@@ -26,18 +27,16 @@ public class AnswerServiceImpl implements AnswerService {
 
     @Override
     public List<Answer> getAnswersForQuestion(Question question){
-        List<Answer> answers = new ArrayList<Answer>();
         try {
-            answers = answerRepository.getAnswersForQuestion(question);
+            return answerRepository.getAnswersForQuestion(question.getId());
         } catch (SQLException e) {
-            LOGER.error(e);
+            return new ArrayList<Answer>();
         }
-        return answers;
     }
 
     @Override
     public Answer getAnswerById(int id) throws SQLException {
-        return answerRepository.getAnswerById(id);
+        return answerRepository.findOne(id);
     }
 
     @Override
