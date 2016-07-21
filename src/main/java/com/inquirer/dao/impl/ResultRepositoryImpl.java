@@ -25,7 +25,7 @@ public class ResultRepositoryImpl implements ResultRepository {
 
     @Override
     public Result getLastUserResult(User user) throws UserWithoutMarkExeption{
-        List<Result> results = results = jdbcTemplate.query(GET_LAST_USER_RESULT_QUERY, new Object[]{user.getId()},
+        List<Result> results = jdbcTemplate.query(GET_LAST_USER_RESULT_QUERY, new Object[]{user.getId()},
                 new ResultMapper());
 
         if (results.isEmpty()){
